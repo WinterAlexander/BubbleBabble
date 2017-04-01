@@ -9,8 +9,8 @@ namespace Assets
     {
         NONE,
         GIANT_BUBBLE,
-        SHOTBUBBLE,
-        BAZOOBUBBLE,
-        GRABUBBLE
+        SHOTBULLE,
+        BAZOUBULLE,
+        GRABULLE
     }
 }

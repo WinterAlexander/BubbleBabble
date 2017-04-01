@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FloatingAnimation : MonoBehaviour {
-    public float startY;
+    private float startY;
 
-	void Start () {
-        if (startY == null)
+	void Start ()
+	{
             startY = gameObject.transform.position.y;
 	}
 

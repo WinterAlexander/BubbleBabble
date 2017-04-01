@@ -21,6 +21,18 @@ public class BubblePowerUp : MonoBehaviour {
             case PowerUpType.GIANT_BUBBLE :
                 gameObject.transform.localScale = new Vector3(2, 2, 2);
                 break;
+
+			case PowerUpType.SHOTBULLE:
+		        if(Input.GetButton("Fire1"))
+			        ShootABubble();
+				type = PowerUpType.NONE;
+		        break;
+
         }
+	}
+
+	void ShootABubble()
+	{
+		gameObject.GetComponent<Rigidbody>().AddForce(0, 20, 0);
 	}
 }
