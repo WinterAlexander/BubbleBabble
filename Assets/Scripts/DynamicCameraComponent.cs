@@ -22,10 +22,13 @@ public class DynamicCameraComponent : MonoBehaviour
 	{
 		pos.Set(0, 0, 0);
 
-		foreach(GameObject player in checkAlives.GetPlayers())
-			pos += player.transform.position;
+		if(checkAlives.GetPlayers().Count != 0)
+		{
+			foreach(GameObject player in checkAlives.GetPlayers())
+				pos += player.transform.position;
 
-		pos /= checkAlives.GetPlayers().Count * 5;
+			pos /= checkAlives.GetPlayers().Count*5;
+		}
 
 		float value = (float)Math.Pow(1f - transitionRate, Time.deltaTime);
 

@@ -37,6 +37,7 @@ public class CheckAlives : MonoBehaviour
 	public void Win(GameObject winner)
 	{
 		
+
 	}
 
 	public ArrayList GetPlayers()
