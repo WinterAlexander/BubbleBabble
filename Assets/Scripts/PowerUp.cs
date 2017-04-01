@@ -21,6 +21,7 @@ public class PowerUp : MonoBehaviour {
 
             if (dis < collider.radius)
             {
+                p.GetComponent<BubblePowerUp>().type = this.type;
                 GameObject.Destroy(gameObject);
             }
         }
