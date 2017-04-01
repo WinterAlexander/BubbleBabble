@@ -32,9 +32,7 @@ public class Selection : MonoBehaviour {
                 SceneManager.LoadScene("BattleRoyale");
         }
 
-
-
-        float d = Input.GetAxis("Vertical");
+        float d = Input.GetAxis("Vertical_All");
 
         if (d == 0)
             canMove = true;
@@ -46,9 +44,7 @@ public class Selection : MonoBehaviour {
         {
             selected--;
             canMove = false;
-        }
-
-      
+        }    
 
         if (selected < 0)
             selected = texts.Length - 1;
