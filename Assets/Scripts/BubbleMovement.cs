@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BubbleMovement : MonoBehaviour
 {
-	public float speed = 6.0F;
+	public float speed = 15f;
 	public int controllerId = 1;
 
 	private Vector3 moveDirection = new Vector3();
@@ -18,6 +18,9 @@ public class BubbleMovement : MonoBehaviour
 
 	void Update()
 	{
+		if(!GetComponent<PlayerComponent>().alive)
+			return;
+
 
 		Rigidbody body = GetComponent<Rigidbody>();
 
