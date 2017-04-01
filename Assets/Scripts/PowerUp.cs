@@ -19,7 +19,6 @@ public class PowerUp : MonoBehaviour {
             float dis = XZDist(p.transform.position, gameObject.transform.position);
             SphereCollider collider = p.GetComponent<SphereCollider>();
 
-            Debug.Log(dis);
             if (dis < 1)
             {
                 p.GetComponent<BubblePowerUp>().type = this.type;
