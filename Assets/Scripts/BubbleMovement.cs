@@ -12,13 +12,15 @@ public class BubbleMovement : MonoBehaviour
 	public float transitionRate = 0.95f;
 
 	private Vector3 moveDirection;
-	private float colliderRadius, squish = 1;
+	private float squish = 1;
+
 	private SphereCollider collider;
+	private Rigidbody body;
 
 	void Start()
 	{
 		collider = GetComponent<SphereCollider>();
-		colliderRadius = collider.radius;
+		body = GetComponent<Rigidbody>();
 	}
 
 	void Update()
@@ -54,9 +56,7 @@ public class BubbleMovement : MonoBehaviour
 		Vector3 center = new Vector3();
 
 		foreach(ContactPoint contact in collision.contacts)
-		{
 			center += contact.point;
-		}
 
 		center /= collision.contacts.Length;
 
@@ -64,12 +64,7 @@ public class BubbleMovement : MonoBehaviour
 		transform.LookAt(center);
 		transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
 
-		//transform.localScale.Set(10, 10, 10);
-		//foreach(ContactPoint contact in collision.contacts)
-		//{
-		//Debug.DrawRay(contact.point, contact.normal, Color.white);
-		//}
-		//if(collision.relativeVelocity.magnitude > 2)
-		//audio.Play();
+		//if(collision.gameObject.tag == "Player")
+			//body.AddForce(collision.impulse / Time.fixedDeltaTime);
 	}
 }
