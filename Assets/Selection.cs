@@ -7,24 +7,31 @@ using UnityEngine.UI;
 public class Selection : MonoBehaviour {
 
     public int selected = 0;
+    public float titleAnimationSpeed;
+
     private Text[] texts;
     private bool canMove;
+    private Text title;
 
 	void Start () {
-      texts = gameObject.GetComponentsInChildren<Text>();
+        texts = gameObject.GetComponentsInChildren<Text>();
+        title = texts[0];
+        title.transform.Rotate(0, 0, -titleAnimationSpeed * 60);
         Text[] titleRemover = new Text[texts.Length - 1];
-
+        
         for(int i = 1; i < texts.Length; i++)
         {
             titleRemover[i - 1] = texts[i];
         }
-
+     
         texts = titleRemover;
     }
-	
-	// Update is called once per frame
+
 	void Update ()
     {
+        title.transform.Rotate(0, 0, Mathf.Sin(Time.time) * titleAnimationSpeed);
+        title.transform.localScale = new Vector3(Mathf.Abs(Mathf.Sin(Time.time)) * 0.2f + 0.80f , 
+                                                Mathf.Abs(Mathf.Sin(Time.time)) * 0.2f + 0.80f);
 
         if(Input.GetButtonDown("Submit"))
         {
