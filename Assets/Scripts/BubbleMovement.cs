@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class BubbleMovement : MonoBehaviour
 {
-	public float speed = 15f;
+	public float acc = 25f;
+	public float topSpeed = 30f;
 	public int controllerId = 1;
 
 
@@ -16,6 +17,8 @@ public class BubbleMovement : MonoBehaviour
 
 	private SphereCollider collider;
 	private Rigidbody body;
+
+	private Vector3? bubbleCollision = null;
 
 	void Start()
 	{
@@ -33,9 +36,17 @@ public class BubbleMovement : MonoBehaviour
 
 		moveDirection.Set(Input.GetAxis("Horizontal_" + controllerId), 0, Input.GetAxis("Vertical_" + controllerId));
 		//moveDirection = transform.TransformDirection(moveDirection);
-		moveDirection *= speed;
+		moveDirection *= acc;
 
-		body.AddForce(moveDirection);
+		
+		if(body.velocity.magnitude < topSpeed)
+			body.AddForce(moveDirection);
+
+		if(bubbleCollision != null)
+		{
+			body.AddForce(bubbleCollision.Value, ForceMode.Impulse);
+			bubbleCollision = null;
+		}
 		
 
 		float value = (float)Math.Pow(1f - transitionRate, Time.deltaTime);
@@ -64,7 +75,7 @@ public class BubbleMovement : MonoBehaviour
 		transform.LookAt(center);
 		transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
 
-		//if(collision.gameObject.tag == "Player")
-			//body.AddForce(collision.impulse / Time.fixedDeltaTime);
+		if(collision.gameObject.tag == "Player" && body.velocity.magnitude < collision.rigidbody.velocity.magnitude)
+			bubbleCollision = collision.relativeVelocity * 1.25f;
 	}
 }
