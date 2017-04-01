@@ -76,6 +76,11 @@ public class BubbleMovement : MonoBehaviour
 		transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
 
 		if(collision.gameObject.tag == "Player" && body.velocity.magnitude < collision.rigidbody.velocity.magnitude)
-			bubbleCollision = collision.relativeVelocity * 1.25f;
+		{
+			if(collision.relativeVelocity.magnitude < 1)
+				bubbleCollision = collision.relativeVelocity.normalized * 10f;
+			else
+				bubbleCollision = collision.relativeVelocity * 1.25f;
+		}
 	}
 }
