@@ -19,15 +19,21 @@ public class BubbleMovement : MonoBehaviour
 	private Rigidbody body;
 
 	private Vector3? bubbleCollision = null;
+    private float mass;
+    private float radius;
 
 	void Start()
 	{
 		collider = GetComponent<SphereCollider>();
-		body = GetComponent<Rigidbody>();
+        radius = collider.radius;
+        body = GetComponent<Rigidbody>();
+        mass = body.mass;
 	}
 
 	void Update()
 	{
+
+
 		if(!GetComponent<PlayerComponent>().alive)
 			return;
 
@@ -54,10 +60,15 @@ public class BubbleMovement : MonoBehaviour
 		squish *= value;
 		squish += 1f - value;
 
-		transform.localScale = new Vector3(1f, 1f, squish);
+        BubblePowerUp bpu = gameObject.GetComponent<BubblePowerUp>();
+        bool isGiant = bpu.type == Assets.PowerUpType.GIANT_BUBBLE;
+		transform.localScale = new Vector3(
+                       isGiant ? 2f : 1f, isGiant ? 2f : 1f, isGiant ? 2f * squish : squish);
 
-		//collider.radius = colliderRadius * squish;
-	}
+
+        body.mass = isGiant ? 2 * mass : mass;
+		collider.radius = isGiant ? 2 * radius : radius;
+    }
 	
 	void OnCollisionEnter(Collision collision)
 	{

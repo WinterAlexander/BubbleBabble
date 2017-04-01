@@ -18,8 +18,9 @@ public class BubblePowerUp : MonoBehaviour {
 
         switch(type)
         {
-            case PowerUpType.GIANT_BUBBLE :  
-                
+            case PowerUpType.GIANT_BUBBLE :
+                gameObject.transform.localScale = new Vector3(2, 2, 2);
+                Debug.Log("Big!");
                 break;
         }
 	}
