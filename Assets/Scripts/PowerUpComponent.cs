@@ -14,12 +14,17 @@ public class PowerUpComponent : MonoBehaviour
 
 	public GameObject particleShooter;
 	public GameObject bazoubulle;
+	public GameObject bazoubulleExplosion;
+
+	private Rigidbody body;
 
 	// Use this for initialization
 	void Start () {
         type = PowerUpType.NONE;
         hasTimedPowerUp = false;
-    }
+
+		body = GetComponent<Rigidbody>();
+	}
 	
 	// Update is called once per frame
 	void Update () {
@@ -64,8 +69,6 @@ public class PowerUpComponent : MonoBehaviour
 			return;
 		lastShoot = Time.frameCount;
 
-		Rigidbody body = GetComponent<Rigidbody>();
-
 		Vector2 shootDir = new Vector2(transform.forward.x, transform.forward.z);
 		shootDir.Normalize();
 
@@ -84,7 +87,7 @@ public class PowerUpComponent : MonoBehaviour
 
 		body.velocity = Vector3.zero;
 		body.AddForce(shootDir.x * -8, 0, shootDir.y * -8, ForceMode.Impulse);      
-        Shake.ShakeEffect();
+        Shake.ShakeEffect(Camera.main.gameObject, 0.25f, 0.12f);
 
 		Destroy(Instantiate(particleShooter, transform.position, transform.rotation), 0.7f);
 	}
@@ -101,6 +104,8 @@ public class PowerUpComponent : MonoBehaviour
 		clone.GetComponent<Bazoubulle>().baseVel = new Vector3(transform.forward.x * 20, 0, transform.forward.z * 20);
 		clone.GetComponent<Bazoubulle>().holder = gameObject;
 
+		body.velocity = Vector3.zero;
+		body.AddForce(transform.forward.x * -2, 0, transform.forward.y * -2, ForceMode.Impulse);
 
 		Destroy(clone, 30f);
 	}
