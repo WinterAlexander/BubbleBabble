@@ -8,7 +8,7 @@ public class Bazoubulle : MonoBehaviour
 	public GameObject holder;
 	public Vector3 baseVel;
 
-	public float targetingIntensity = 0.5f;
+	public float targetingIntensity = 1f;
 
 	// Use this for initialization
 	void Start ()

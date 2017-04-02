@@ -11,6 +11,7 @@ namespace Assets
         GIANT_BUBBLE,
         SHOTBULLE,
         BAZOUBULLE,
-        GRABULLE
+        GRABULLE,
+		TOURBULLE
     }
 }

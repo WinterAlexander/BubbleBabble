@@ -44,7 +44,6 @@ public class BubbleMovement : MonoBehaviour
 			transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
 			moveDirection *= acc;
 
-
 			if(body.velocity.magnitude < topSpeed + (isGiant ? -1 : 0))
 				body.AddForce(moveDirection);
 		}
