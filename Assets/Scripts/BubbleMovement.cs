@@ -34,16 +34,22 @@ public class BubbleMovement : MonoBehaviour
 		if(!GetComponent<PlayerComponent>().alive)
 			return;
 
-
 		Rigidbody body = GetComponent<Rigidbody>();
 
 		moveDirection.Set(Input.GetAxis("Horizontal_" + controllerId), 0, Input.GetAxis("Vertical_" + controllerId));
-		//moveDirection = transform.TransformDirection(moveDirection);
-		moveDirection *= acc;
 
+		if(moveDirection.magnitude > 0.1)
+		{
+			//moveDirection = transform.TransformDirection(moveDirection);
+			transform.LookAt(moveDirection + transform.position);
+			transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
+			moveDirection *= acc;
+
+
+			if(body.velocity.magnitude < topSpeed + (isGiant ? -1 : 0))
+				body.AddForce(moveDirection);
+		}
 		
-		if(body.velocity.magnitude < topSpeed + (isGiant ? -1 : 0))
-			body.AddForce(moveDirection);
 
 		if(bubbleCollision != null)
 		{
@@ -58,7 +64,9 @@ public class BubbleMovement : MonoBehaviour
 		squish += 1f - value;
 
 		transform.localScale = new Vector3(
-                       isGiant ? 2f : 1f, (isGiant ? 2f : 1f) * (1f - (float)Math.Sin(Time.frameCount * 2 * Math.PI) / 2f), isGiant ? 2f * squish : squish);
+                       isGiant ? 2f : 1f, 
+					   (isGiant ? 2f : 1f) * (1f - Mathf.Sin(Time.time * 2 * Mathf.PI) / 20f - 0.05f), 
+					   isGiant ? 2f * squish : squish);
 
 
         //body.mass = isGiant ? 2 * mass : mass;
@@ -78,11 +86,7 @@ public class BubbleMovement : MonoBehaviour
 		center /= collision.contacts.Length;
 
 		if(squish > 0.9)
-		{
 			squish = 0.5f;
-			transform.LookAt(center);
-			transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
-		}
 
 		if(collision.gameObject.tag == "Player")
 		{
