@@ -9,6 +9,8 @@ public class BubblePowerUp : MonoBehaviour
 	public static readonly float SHOTGUN_REACH = 3f;
 
     public PowerUpType type;
+    // Use this for initialization
+    private bool hasTimedPowerUp;
 	private int lastShoot = -1;
 
 	public GameObject particleShooter;
@@ -16,7 +18,8 @@ public class BubblePowerUp : MonoBehaviour
 	// Use this for initialization
 	void Start () {
         type = PowerUpType.NONE;
-	}
+        hasTimedPowerUp = false;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -26,7 +29,11 @@ public class BubblePowerUp : MonoBehaviour
         switch(type)
         {
             case PowerUpType.GIANT_BUBBLE :
-                gameObject.transform.localScale = new Vector3(2, 2, 2);
+                if (!hasTimedPowerUp)
+                    StartCoroutine(PowerUp());
+
+                    gameObject.transform.localScale = new Vector3(2, 2, 2);
+
                 break;
 
 			case PowerUpType.SHOTBULLE:
@@ -38,6 +45,9 @@ public class BubblePowerUp : MonoBehaviour
 		        }
 		        break;
 
+            case PowerUpType.NONE:
+                gameObject.transform.localScale = Vector3.one;
+                break;
         }
 	}
 
@@ -66,7 +76,16 @@ public class BubblePowerUp : MonoBehaviour
 
 		body.velocity = Vector3.zero;
 		body.AddForce(shootDir.x * -8, 0, shootDir.y * -8, ForceMode.Impulse);
-	
+
 		Destroy(Instantiate(particleShooter, transform.position, transform.rotation), 0.7f);
 	}
+
+    IEnumerator PowerUp()
+    {
+        hasTimedPowerUp = true;
+        yield return new WaitForSeconds(10);
+
+        type = PowerUpType.NONE;
+        hasTimedPowerUp = false;
+    }
 }

@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FloatingAnimation : MonoBehaviour
-{
-
-	private Vector3 originalPos;
+public class FloatingAnimation : MonoBehaviour {
+    private float startY;
 
 	void Start ()
 	{
-		originalPos = transform.position;
+            startY = gameObject.transform.position.y;
 	}
 
     void Update()
@@ -18,7 +16,7 @@ public class FloatingAnimation : MonoBehaviour
 
         gameObject.transform.position = new Vector3(
             gameObject.transform.position.x,
-            Mathf.Sin(Time.time)/2f + 1.5f + originalPos.y,
+            Mathf.Sin(Time.time)/2f + startY,
             gameObject.transform.position.z);
     }
 }
