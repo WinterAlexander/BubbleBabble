@@ -1,6 +1,5 @@
 ﻿using Assets;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PowerUpComponent : MonoBehaviour
@@ -59,7 +58,7 @@ public class PowerUpComponent : MonoBehaviour
         }
 	}
 
-	void ShootABubble()
+	private void ShootABubble()
 	{
 		if(lastShoot != -1 && lastShoot + 20 > Time.frameCount)
 			return;
@@ -84,7 +83,8 @@ public class PowerUpComponent : MonoBehaviour
 		}
 
 		body.velocity = Vector3.zero;
-		body.AddForce(shootDir.x * -8, 0, shootDir.y * -8, ForceMode.Impulse);
+		body.AddForce(shootDir.x * -8, 0, shootDir.y * -8, ForceMode.Impulse);      
+        Shake.ShakeEffect();
 
 		Destroy(Instantiate(particleShooter, transform.position, transform.rotation), 0.7f);
 	}

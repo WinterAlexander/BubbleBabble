@@ -8,9 +8,10 @@ public class Bazoubulle : MonoBehaviour
 	public Vector3 baseVel;
 
 	// Use this for initialization
-	void Start()
+	void Start ()
 	{
 		GetComponent<Rigidbody>().velocity = baseVel;
+        Shake.ShakeEffect(Camera.main.gameObject, 0.175f, 0.08f);
 	}
 
 	// Update is called once per frame
