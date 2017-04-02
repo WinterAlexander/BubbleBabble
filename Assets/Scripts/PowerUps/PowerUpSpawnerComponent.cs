@@ -41,7 +41,7 @@ public class PowerUpSpawnerComponent : MonoBehaviour
                 newItemType = (PowerUpType)(rand.Next(Enum.GetNames(typeof(PowerUpType)).Length - 1)) + 1;              
             } while (newItemType == lastItemType);
             lastItemType = newItemType;
-            spawnedObject.GetComponent<PowerUp>().type = newItemType;
+            spawnedObject.GetComponent<PowerUpItem>().type = newItemType;
         }
     }
 }

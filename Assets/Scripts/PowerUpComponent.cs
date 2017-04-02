@@ -8,15 +8,13 @@ public class PowerUpComponent : MonoBehaviour
 	public static readonly float SHOTGUN_ANGLE = 50f;
 	public static readonly float SHOTGUN_REACH = 3f;
 
-
-	public static readonly float BAZOUBULLE_REACH = 200f;
-
 	public PowerUpType type;
     // Use this for initialization
     private bool hasTimedPowerUp;
 	private int lastShoot = -1;
 
 	public GameObject particleShooter;
+	public GameObject bazoubulle;
 
 	// Use this for initialization
 	void Start () {
@@ -43,7 +41,6 @@ public class PowerUpComponent : MonoBehaviour
 		        if(Input.GetButton("Fire1"))
 		        {
 			        ShootABubble();
-			        lastShoot = Time.frameCount;
 			        //type = PowerUpType.NONE;
 		        }
 		        break;
@@ -52,7 +49,6 @@ public class PowerUpComponent : MonoBehaviour
 				if(Input.GetButton("Fire1"))
 				{
 					Bazoubulle();
-					lastShoot = Time.frameCount;
 					//type = PowerUpType.NONE;
 				}
 				break;
@@ -67,10 +63,11 @@ public class PowerUpComponent : MonoBehaviour
 	{
 		if(lastShoot != -1 && lastShoot + 20 > Time.frameCount)
 			return;
+		lastShoot = Time.frameCount;
 
 		Rigidbody body = GetComponent<Rigidbody>();
 
-		Vector2 shootDir = new Vector2(body.transform.forward.x, body.transform.forward.z);
+		Vector2 shootDir = new Vector2(transform.forward.x, transform.forward.z);
 		shootDir.Normalize();
 
 		foreach(GameObject player in GameObject.FindWithTag("WorldController").GetComponent<CheckAlives>().GetPlayers())
@@ -97,7 +94,15 @@ public class PowerUpComponent : MonoBehaviour
 	{
 		if(lastShoot != -1 && lastShoot + 20 > Time.frameCount)
 			return;
+		lastShoot = Time.frameCount;
 
+		GameObject clone = Instantiate(bazoubulle, transform.position - new Vector3(0, 0.25f, 0) + transform.forward, transform.rotation);
+
+		clone.GetComponent<Bazoubulle>().baseVel = new Vector3(transform.forward.x * 20, 0, transform.forward.z * 20);
+		clone.GetComponent<Bazoubulle>().holder = gameObject;
+
+
+		Destroy(clone, 30f);
 	}
 
 	IEnumerator PowerUp()

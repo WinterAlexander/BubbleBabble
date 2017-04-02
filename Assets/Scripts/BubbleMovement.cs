@@ -14,15 +14,13 @@ public class BubbleMovement : MonoBehaviour
 
 	private Vector3 moveDirection;
 	private float squish = 1;
-
-	private SphereCollider collider;
+	
 	private Rigidbody body;
 
-	private Vector3? bubbleCollision = null;
+	private Vector3? bubbleCollision;
 
 	void Start()
 	{
-		collider = GetComponent<SphereCollider>();
         body = GetComponent<Rigidbody>();
 	}
 
@@ -33,8 +31,6 @@ public class BubbleMovement : MonoBehaviour
 
 		if(!GetComponent<PlayerComponent>().alive)
 			return;
-
-		Rigidbody body = GetComponent<Rigidbody>();
 
 		moveDirection.Set(Input.GetAxis("Horizontal_" + controllerId), 0, Input.GetAxis("Vertical_" + controllerId));
 
@@ -77,13 +73,6 @@ public class BubbleMovement : MonoBehaviour
 	{
 		if(collision.relativeVelocity.y > 0.5)
 			return;
-
-		Vector3 center = new Vector3();
-
-		foreach(ContactPoint contact in collision.contacts)
-			center += contact.point;
-
-		center /= collision.contacts.Length;
 
 		if(squish > 0.9)
 			squish = 0.5f;
