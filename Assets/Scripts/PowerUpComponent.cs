@@ -57,9 +57,13 @@ public class PowerUpComponent : MonoBehaviour
 				}
 				break;
 
-			case PowerUpType.NONE:
-                gameObject.transform.localScale = Vector3.one;
-                break;
+			case PowerUpType.GRABULLE:
+
+		        break;
+
+			default:
+				type = PowerUpType.NONE;
+				break;
         }
 	}
 
