@@ -18,9 +18,12 @@ public class CheckAlives : MonoBehaviour
 	{
 		players = new ArrayList(GameObject.FindGameObjectsWithTag("Player"));
         playerId = new GameObject[players.Count];
+        
         for(int i = 0; i < players.Count; i++)
         {
-            playerId[i] = (GameObject)players[i];
+            string name = ((GameObject)players[i]).name;
+            int id = System.Int32.Parse(name[name.Length - 1].ToString());
+            playerId[id - 1] = (GameObject)players[i];
         }
 	}
 
@@ -45,7 +48,7 @@ public class CheckAlives : MonoBehaviour
                     {
                         if (playerId[j].Equals(players[0]))
                         {
-                            Win(j + 1);
+                            Win(j);
                             return;
                         }
                     }					
@@ -65,7 +68,24 @@ public class CheckAlives : MonoBehaviour
             fc.action = new GoToMenuAction();
             GameObject winnerCanvas = GameObject.Find("WinnerCanvas");
             Text text = winnerCanvas.GetComponentInChildren<Text>();
-            text.text = string.Format(winningText, winner);
+            string couleur = "";
+            
+            switch(winner)
+            {
+                case 0:
+                    couleur = "rouge";
+                    break;
+                case 1:
+                    couleur = "bleu";
+                    break;
+                case 2:
+                    couleur = "jaune";
+                    break;
+                case 3:
+                    couleur = "vert";
+                    break;
+            }
+            text.text = string.Format(winningText, couleur);
         }
                             
 	}

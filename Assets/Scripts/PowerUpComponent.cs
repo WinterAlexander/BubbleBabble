@@ -1,11 +1,13 @@
 ﻿using Assets;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PowerUpComponent : MonoBehaviour
 {
 	public static readonly float SHOTGUN_ANGLE = 50f;
 	public static readonly float SHOTGUN_REACH = 3f;
+    public Sprite[] icons = null;
 
 	public PowerUpType type;
     // Use this for initialization
@@ -17,6 +19,7 @@ public class PowerUpComponent : MonoBehaviour
 	public GameObject bazoubulleExplosion;
 
 	private Rigidbody body;
+    public int playerId;
 
 	// Use this for initialization
 	void Start () {
@@ -24,21 +27,33 @@ public class PowerUpComponent : MonoBehaviour
         hasTimedPowerUp = false;
 
 		body = GetComponent<Rigidbody>();
-	}
+        playerId = IdFromName(gameObject) - 1;
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        if (type == PowerUpType.NONE)
-            return;
+        GameObject[] images = GameObject.FindGameObjectsWithTag("UIImage");
+        
+        foreach (GameObject g in images)
+        {
+            Image im = g.GetComponent<Image>();
 
+            int imageID = IdFromName(g);
+
+            if(IdFromName(gameObject) - 1 == imageID)
+            {
+                im.sprite = icons[(int)type];
+                break;
+            }
+        }
+        
         switch(type)
         {
             case PowerUpType.GIANT_BUBBLE :
-                if (!hasTimedPowerUp)
-                    StartCoroutine(BeingGiant());
+                    if (!hasTimedPowerUp)
+                        StartCoroutine(BeingGiant());
 
                     gameObject.transform.localScale = new Vector3(2, 2, 2);
-
                 break;
 
 			case PowerUpType.SHOTBULLE:
@@ -130,4 +145,11 @@ public class PowerUpComponent : MonoBehaviour
 	{
 		return type == PowerUpType.GIANT_BUBBLE;
 	}
+
+    private int IdFromName(GameObject obj)
+    {
+        string name = obj.name;
+        playerId = System.Int32.Parse(name[name.Length - 1].ToString());
+        return playerId;
+    }
 }
