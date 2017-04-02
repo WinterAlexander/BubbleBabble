@@ -16,7 +16,6 @@ public class Selection : MonoBehaviour {
 	void Start () {
         texts = gameObject.GetComponentsInChildren<Text>();
         title = texts[0];
-        title.transform.Rotate(0, 0, -titleAnimationSpeed * 60);
         Text[] titleRemover = new Text[texts.Length - 1];
         
         for(int i = 1; i < texts.Length; i++)
@@ -29,9 +28,6 @@ public class Selection : MonoBehaviour {
 
 	void Update ()
     {
-        title.transform.Rotate(0, 0, Mathf.Sin(Time.time) * titleAnimationSpeed);
-        title.transform.localScale = new Vector3(Mathf.Abs(Mathf.Sin(Time.time)) * 0.2f + 0.80f, 
-                                                Mathf.Abs(Mathf.Sin(Time.time)) * 0.2f + 0.80f);
         if(Input.GetButtonDown("Submit"))
         {
             if (selected == 0)

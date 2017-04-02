@@ -26,6 +26,9 @@ public class BubbleMovement : MonoBehaviour
 
 	void Update()
 	{
+        GameObject gameObject = GameObject.Find("WorldController");
+        if (gameObject.GetComponent<CheckAlives>().finished)
+            return;
 
 		bool isGiant = this.isGiant();
 
