@@ -109,7 +109,7 @@ public class BubbleMovement : MonoBehaviour
 
 	public bool isGiant()
 	{
-		BubblePowerUp bpu = gameObject.GetComponent<BubblePowerUp>();
+		PowerUpComponent bpu = gameObject.GetComponent<PowerUpComponent>();
 		return bpu.type == Assets.PowerUpType.GIANT_BUBBLE;
 	}
 }

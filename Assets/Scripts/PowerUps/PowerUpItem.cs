@@ -17,12 +17,16 @@ public class PowerUp : MonoBehaviour {
         foreach(GameObject p in players)
         {
             float dis = XZDist(p.transform.position, gameObject.transform.position);
-            SphereCollider collider = p.GetComponent<SphereCollider>();
 
             if (dis < 1)
             {
-                p.GetComponent<BubblePowerUp>().type = this.type;
-                GameObject.Destroy(gameObject);
+                PowerUpComponent bpu = p.GetComponent<PowerUpComponent>();
+                if(bpu.type == PowerUpType.NONE)
+                {
+                    bpu.type = this.type;
+                    GameObject.Destroy(gameObject);
+                    break;                
+                }                
             }
         }
     }

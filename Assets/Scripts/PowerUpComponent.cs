@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BubblePowerUp : MonoBehaviour
+public class PowerUpComponent : MonoBehaviour
 {
 	public static readonly float SHOTGUN_ANGLE = 50f;
 	public static readonly float SHOTGUN_REACH = 3f;
