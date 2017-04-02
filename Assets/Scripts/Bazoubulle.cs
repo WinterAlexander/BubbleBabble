@@ -10,7 +10,7 @@ public class Bazoubulle : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		
+        Shake.ShakeEffect(Camera.main.gameObject, 0.175f, 0.08f);
 	}
 
 	// Update is called once per frame
