@@ -8,7 +8,10 @@ public class PowerUpComponent : MonoBehaviour
 	public static readonly float SHOTGUN_ANGLE = 50f;
 	public static readonly float SHOTGUN_REACH = 3f;
 
-    public PowerUpType type;
+
+	public static readonly float BAZOUBULLE_REACH = 200f;
+
+	public PowerUpType type;
     // Use this for initialization
     private bool hasTimedPowerUp;
 	private int lastShoot = -1;
@@ -45,7 +48,16 @@ public class PowerUpComponent : MonoBehaviour
 		        }
 		        break;
 
-            case PowerUpType.NONE:
+			case PowerUpType.BAZOUBULLE:
+				if(Input.GetButton("Fire1"))
+				{
+					Bazoubulle();
+					lastShoot = Time.frameCount;
+					//type = PowerUpType.NONE;
+				}
+				break;
+
+			case PowerUpType.NONE:
                 gameObject.transform.localScale = Vector3.one;
                 break;
         }
@@ -80,7 +92,15 @@ public class PowerUpComponent : MonoBehaviour
 		Destroy(Instantiate(particleShooter, transform.position, transform.rotation), 0.7f);
 	}
 
-    IEnumerator PowerUp()
+
+	void Bazoubulle()
+	{
+		if(lastShoot != -1 && lastShoot + 20 > Time.frameCount)
+			return;
+
+	}
+
+	IEnumerator PowerUp()
     {
         hasTimedPowerUp = true;
         yield return new WaitForSeconds(10);
