@@ -35,7 +35,7 @@ public class PowerUpComponent : MonoBehaviour
         {
             case PowerUpType.GIANT_BUBBLE :
                 if (!hasTimedPowerUp)
-                    StartCoroutine(PowerUp());
+                    StartCoroutine(BeingGiant());
 
                     gameObject.transform.localScale = new Vector3(2, 2, 2);
 
@@ -81,7 +81,9 @@ public class PowerUpComponent : MonoBehaviour
 
 			if(Vector2.Angle(shootDir, playerDir) < SHOTGUN_ANGLE)
 			{
-				player.GetComponent<Rigidbody>().AddForce(shootDir.x * 16, 0, shootDir.y * 16, ForceMode.Impulse);
+				float force = player.GetComponent<PowerUpComponent>().isGiant() ? 10 : 14;
+
+				player.GetComponent<Rigidbody>().AddForce(shootDir.x * force, 0, shootDir.y * force, ForceMode.Impulse);
 			}
 		}
 
@@ -110,12 +112,18 @@ public class PowerUpComponent : MonoBehaviour
 		Destroy(clone, 30f);
 	}
 
-	IEnumerator PowerUp()
+	IEnumerator BeingGiant()
     {
         hasTimedPowerUp = true;
         yield return new WaitForSeconds(10);
 
         type = PowerUpType.NONE;
         hasTimedPowerUp = false;
-    }
+		transform.position += new Vector3(0, -1f, 0);
+	}
+
+	public bool isGiant()
+	{
+		return type == PowerUpType.GIANT_BUBBLE;
+	}
 }

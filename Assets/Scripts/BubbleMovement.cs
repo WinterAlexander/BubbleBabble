@@ -29,8 +29,8 @@ public class BubbleMovement : MonoBehaviour
         GameObject gameObject = GameObject.Find("WorldController");
         if (gameObject.GetComponent<CheckAlives>().finished)
             return;
-
-		bool isGiant = this.isGiant();
+		
+		bool isGiant = GetComponent<PowerUpComponent>().isGiant();
 
 		if(!GetComponent<PlayerComponent>().alive)
 			return;
@@ -80,9 +80,11 @@ public class BubbleMovement : MonoBehaviour
 		if(squish > 0.9)
 			squish = 0.5f;
 
+		bool isGiant = GetComponent<PowerUpComponent>().isGiant();
+
 		if(collision.gameObject.tag == "Player")
 		{
-			if(isGiant() && !collision.gameObject.GetComponent<BubbleMovement>().isGiant())
+			if(isGiant && !collision.gameObject.GetComponent<PowerUpComponent>().isGiant())
 			{
 				body.velocity = new Vector3(body.velocity.x, 0, body.velocity.z);
 				collision.rigidbody.velocity *= 2f;
@@ -97,11 +99,5 @@ public class BubbleMovement : MonoBehaviour
 					bubbleCollision = collision.relativeVelocity*1.25f;
 			}
 		}
-	}
-
-	public bool isGiant()
-	{
-		PowerUpComponent bpu = gameObject.GetComponent<PowerUpComponent>();
-		return bpu.type == Assets.PowerUpType.GIANT_BUBBLE;
 	}
 }
