@@ -41,7 +41,7 @@ public class PowerUpComponent : MonoBehaviour
 		        if(Input.GetButton("Fire1"))
 		        {
 			        ShootABubble();
-			        //type = PowerUpType.NONE;
+			        type = PowerUpType.NONE;
 		        }
 		        break;
 
@@ -49,7 +49,7 @@ public class PowerUpComponent : MonoBehaviour
 				if(Input.GetButton("Fire1"))
 				{
 					Bazoubulle();
-					//type = PowerUpType.NONE;
+					type = PowerUpType.NONE;
 				}
 				break;
 

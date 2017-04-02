@@ -8,20 +8,27 @@ public class Bazoubulle : MonoBehaviour
 	public Vector3 baseVel;
 
 	// Use this for initialization
-	void Start ()
+	void Start()
 	{
-		
+		GetComponent<Rigidbody>().velocity = baseVel;
 	}
 
 	// Update is called once per frame
-	void Update ()
+	void Update()
 	{
-		GetComponent<Rigidbody>().velocity = baseVel;
-		print(GetComponent<Rigidbody>().velocity);
+		GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity.normalized * baseVel.magnitude;
 	}
 
-	void OnCollisionEnter()
+	void OnCollisionEnter(Collision collision)
 	{
-		//Destroy(gameObject);
+		if(collision.gameObject.tag == "Player")
+		{
+			if(collision.gameObject != holder)
+				holder.GetComponent<Rigidbody>().AddExplosionForce(1000f, collision.contacts[0].point, 3f, 0);
+
+			GetComponent<ParticleSystem>().Stop();
+			Destroy(GetComponent<MeshRenderer>());
+			Destroy(GetComponent<Collider>());
+		}
 	}
 }
