@@ -12,6 +12,6 @@ namespace Assets
         SHOTBULLE,
         BAZOUBULLE,
         GRABULLE,
-		TOURBULLE
+        TOURBULLE
     }
 }
