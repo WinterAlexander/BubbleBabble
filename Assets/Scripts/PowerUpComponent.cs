@@ -138,7 +138,6 @@ public class PowerUpComponent : MonoBehaviour
 
         type = PowerUpType.NONE;
         hasTimedPowerUp = false;
-		transform.position += new Vector3(0, -1f, 0);
 	}
 
 	public bool isGiant()

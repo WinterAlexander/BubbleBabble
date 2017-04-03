@@ -18,6 +18,7 @@ public class BubbleMovement : MonoBehaviour
 	private Rigidbody body;
 
 	private Vector3? bubbleCollision;
+	private bool wasGiant = false;
 
 	void Start()
 	{
@@ -66,10 +67,15 @@ public class BubbleMovement : MonoBehaviour
 					   (isGiant ? 2f : 1f) * (1f - Mathf.Sin(Time.time * 2 * Mathf.PI) / 20f - 0.05f), 
 					   isGiant ? 2f * squish : squish);
 
+		if(wasGiant && !isGiant)
+			transform.position -= new Vector3(0, 0.5f, 0);
 
-        //body.mass = isGiant ? 2 * mass : mass;
+
+		//body.mass = isGiant ? 2 * mass : mass;
 		//collider.radius = isGiant ? 2 * radius : radius;
-    }
+
+		wasGiant = isGiant;
+	}
 	
 	void OnCollisionEnter(Collision collision)
 	{
