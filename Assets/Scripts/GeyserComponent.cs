@@ -11,7 +11,7 @@ public class GeyserComponent : MonoBehaviour {
     private float startHeight;
     private bool isGeysing;
 
-    List<Transform> beingGeysed = new List<Transform>();
+    public static List<Transform> beingGeysed = new List<Transform>();
 
     void Start () {
         emitter = gameObject.GetComponentsInChildren<Transform>()[1].gameObject;
