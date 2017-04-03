@@ -9,36 +9,36 @@ public class GeyserComponent : MonoBehaviour {
     public float deadTime = 6f;
     public float secondsToWait = 4f;
     private float startHeight;
+    private bool isGeysing;
 
     List<Transform> beingGeysed = new List<Transform>();
 
     void Start () {
         emitter = gameObject.GetComponentsInChildren<Transform>()[1].gameObject;
         startHeight = emitter.transform.position.y;
-        StartCoroutine(startGeysing());
+        isGeysing = false;
+        StartCoroutine(startGeysing());      
     }
 	
 	// Update is called once per frame
 	void Update () {
-       
-    }
-
-    IEnumerator startGeysing()
-    {
         ArrayList players = GameObject.FindWithTag("WorldController").GetComponent<CheckAlives>().GetPlayers();
-        
-        foreach(GameObject p in players)
+
+        foreach (GameObject p in players)
         {
-            Debug.Log(p.name);
             float dis = MathUtils.XZDist(p.transform.position, gameObject.transform.position);
 
-            if(dis <= 1 && !beingGeysed.Contains(p.transform))
+            if (dis <= 1 && !beingGeysed.Contains(p.transform))
             {
                 beingGeysed.Add(p.transform);
                 StartCoroutine(raise(p.transform));
             }
         }
+    }
 
+    IEnumerator startGeysing()
+    {
+        isGeysing = true;
         emitter.GetComponent<ParticleSystem>().Play();
         yield return new WaitForSeconds(secondsToWait);
         StartCoroutine(wait());
@@ -46,11 +46,15 @@ public class GeyserComponent : MonoBehaviour {
 
     IEnumerator raise(Transform transform)
     {
-        for(int i = 0; i < 240; i++)
+        Transform light = transform.gameObject.GetComponentsInChildren<Transform>()[1];
+        Debug.Log(light.gameObject.name);
+        for(int i = 0; i < 240 && isGeysing; i++)
         {
             transform.position = new Vector3(emitter.transform.position.x,
                                             startHeight + i / 50.0f,
                                             emitter.transform.position.z);
+            light.position = new Vector3(emitter.transform.position.x, startHeight,
+                emitter.transform.position.z);
             yield return null;
         }       
 
@@ -59,6 +63,7 @@ public class GeyserComponent : MonoBehaviour {
 
     IEnumerator wait()
     {
+        isGeysing = false;
         emitter.GetComponent<ParticleSystem>().Stop();
         yield return new WaitForSeconds(deadTime);
         StartCoroutine(startGeysing());
