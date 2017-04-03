@@ -6,7 +6,7 @@ using UnityEngine;
 public class GeyserComponent : MonoBehaviour {
 
     private GameObject emitter;
-    public float deadTime = 6f;
+    public float deadTime = 12f;
     public float secondsToWait = 4f;
     private float startHeight;
     private bool isGeysing;
@@ -17,55 +17,55 @@ public class GeyserComponent : MonoBehaviour {
         emitter = gameObject.GetComponentsInChildren<Transform>()[1].gameObject;
         startHeight = emitter.transform.position.y;
         isGeysing = false;
-        StartCoroutine(startGeysing());      
+        StartCoroutine(StartGeysing());      
     }
 	
 	// Update is called once per frame
 	void Update () {
-        ArrayList players = GameObject.FindWithTag("WorldController").GetComponent<CheckAlives>().GetPlayers();
 
-        foreach (GameObject p in players)
+        if(isGeysing)
         {
-            float dis = MathUtils.XZDist(p.transform.position, gameObject.transform.position);
+            ArrayList players = GameObject.FindWithTag("WorldController").GetComponent<CheckAlives>().GetPlayers();
 
-            if (dis <= 1 && !beingGeysed.Contains(p.transform))
+            foreach (GameObject p in players)
             {
-                beingGeysed.Add(p.transform);
-                StartCoroutine(raise(p.transform));
+                float dis = MathUtils.XZDist(p.transform.position, gameObject.transform.position);
+
+                if (dis <= 1 && !beingGeysed.Contains(p.transform))
+                {
+                    beingGeysed.Add(p.transform);
+                    StartCoroutine(Raise(p.transform));
+                }
             }
-        }
+        }        
     }
 
-    IEnumerator startGeysing()
+    IEnumerator StartGeysing()
     {
         isGeysing = true;
         emitter.GetComponent<ParticleSystem>().Play();
         yield return new WaitForSeconds(secondsToWait);
-        StartCoroutine(wait());
+        StartCoroutine(Wait());
     }
 
-    IEnumerator raise(Transform transform)
+    IEnumerator Raise(Transform transform)
     {
-        Transform light = transform.gameObject.GetComponentsInChildren<Transform>()[1];
-        Debug.Log(light.gameObject.name);
         for(int i = 0; i < 240 && isGeysing; i++)
         {
             transform.position = new Vector3(emitter.transform.position.x,
                                             startHeight + i / 50.0f,
                                             emitter.transform.position.z);
-            light.position = new Vector3(emitter.transform.position.x, startHeight,
-                emitter.transform.position.z);
             yield return null;
-        }       
-
+        }
+        transform.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
         beingGeysed.Remove(transform);
     }
 
-    IEnumerator wait()
+    IEnumerator Wait()
     {
         isGeysing = false;
         emitter.GetComponent<ParticleSystem>().Stop();
         yield return new WaitForSeconds(deadTime);
-        StartCoroutine(startGeysing());
+        StartCoroutine(StartGeysing());
     }
 }
