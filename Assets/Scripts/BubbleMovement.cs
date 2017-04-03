@@ -9,6 +9,7 @@ public class BubbleMovement : MonoBehaviour
 	public float topSpeed = 5f;
 	public int controllerId = 1;
 
+	public GameObject collisionParticles;
 
 	public float transitionRate = 0.90f;
 
@@ -89,6 +90,9 @@ public class BubbleMovement : MonoBehaviour
 
 		if(collision.gameObject.tag == "Player")
 		{
+			if(collisionParticles != null)
+				Destroy(Instantiate(collisionParticles, transform.position, collisionParticles.transform.rotation), 5.1f);
+
 			if(isGiant && !collision.gameObject.GetComponent<PowerUpComponent>().isGiant())
 			{
 				body.velocity = new Vector3(body.velocity.x, 0, body.velocity.z);
