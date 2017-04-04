@@ -18,7 +18,7 @@ public class BubbleMovement : MonoBehaviour
 	
 	private Rigidbody body;
 
-	private Vector3? bubbleCollision;
+	private bool collisionHandled = false;
 	private bool wasGiant = false;
 
 	void Start()
@@ -41,7 +41,6 @@ public class BubbleMovement : MonoBehaviour
 
 		if(moveDirection.magnitude > 0.1 && onGround())
 		{
-			//moveDirection = transform.TransformDirection(moveDirection);
 			transform.LookAt(moveDirection + transform.position);
 			transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
 			moveDirection *= acc;
@@ -49,14 +48,6 @@ public class BubbleMovement : MonoBehaviour
 			if(body.velocity.magnitude < topSpeed + (isGiant ? -1 : 0))
 				body.AddForce(moveDirection);
 		}
-		
-
-		if(bubbleCollision != null)
-		{
-			body.AddForce(bubbleCollision.Value, ForceMode.Impulse);
-			bubbleCollision = null;
-		}
-		
 
 		float value = (float)Math.Pow(1f - transitionRate, Time.deltaTime);
 
@@ -71,19 +62,13 @@ public class BubbleMovement : MonoBehaviour
 		if(wasGiant && !isGiant)
 			transform.position -= new Vector3(0, 0.5f, 0);
 
-
-		//body.mass = isGiant ? 2 * mass : mass;
-		//collider.radius = isGiant ? 2 * radius : radius;
-
 		wasGiant = isGiant;
+		collisionHandled = false;
 	}
 	
 	void OnCollisionEnter(Collision collision)
 	{
-		//TODO disable y bouncing at all
-
-		if(collision.relativeVelocity.y > 0.5)
-			return;
+		body.velocity = new Vector3(body.velocity.x, 0, body.velocity.z);
 
 		if(squish > 0.9)
 			squish = 0.5f;
@@ -91,23 +76,37 @@ public class BubbleMovement : MonoBehaviour
 		bool isGiant = GetComponent<PowerUpComponent>().isGiant();
 
 		if(collision.gameObject.tag == "Player")
-		{
+		{	
+			if(collisionHandled)
+				return;
+	
 			if(collisionParticles != null)
 				Destroy(Instantiate(collisionParticles, transform.position, collisionParticles.transform.rotation), 5.1f);
 
-			if(isGiant && !collision.gameObject.GetComponent<PowerUpComponent>().isGiant())
+			bool otherGiant = collision.gameObject.GetComponent<PowerUpComponent>().isGiant();
+			
+			if(isGiant && !otherGiant)
 			{
-				body.velocity = new Vector3(body.velocity.x, 0, body.velocity.z);
 				collision.rigidbody.velocity *= 2f;
+				collision.gameObject.GetComponent<BubbleMovement>().collisionHandled = true;
+				collisionHandled = true;
 				return;
 			}
-
-			if(body.velocity.magnitude < collision.rigidbody.velocity.magnitude)
+			
+			if(body.velocity.magnitude > collision.rigidbody.velocity.magnitude)
 			{
-				if(collision.relativeVelocity.magnitude < 1)
-					bubbleCollision = collision.relativeVelocity.normalized*10f;
-				else
-					bubbleCollision = collision.relativeVelocity*1.25f;
+				if(body.velocity.magnitude < 2)
+				{
+					collision.rigidbody.velocity = collision.rigidbody.velocity.normalized * 10;
+					body.velocity = body.velocity.normalized * 15;
+					return;
+				}
+				
+				collision.rigidbody.velocity = -body.velocity;
+				body.velocity *= 1.5f;
+				collision.gameObject.GetComponent<BubbleMovement>().collisionHandled = true;
+				collisionHandled = true;
+				return;
 			}
 		}
 	}
