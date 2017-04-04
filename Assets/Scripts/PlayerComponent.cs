@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,6 +22,7 @@ public class PlayerComponent : MonoBehaviour
 	public void Kill()
 	{
 		alive = false;
+        gameObject.GetComponent<PowerUpComponent>().type = PowerUpType.NONE;
 		//TODO animation ? sounds ?
 	}
 }
