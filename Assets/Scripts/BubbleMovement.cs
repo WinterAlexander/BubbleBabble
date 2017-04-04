@@ -14,7 +14,8 @@ public class BubbleMovement : MonoBehaviour
 
 	private Vector3 moveDirection;
 	private float squish = 1;
-	
+    private AudioSource audio;
+    private float initialPitch;
 	private Rigidbody body;
 
 	private bool collisionHandled = false;
@@ -25,6 +26,9 @@ public class BubbleMovement : MonoBehaviour
 	{
         body = GetComponent<Rigidbody>();
         controllerId = GetComponent<PlayerComponent>().playerId;
+        audio = GetComponent<AudioSource>();
+        audio.volume = 0;
+        initialPitch = audio.pitch;      
 	}
 
 	void Update()
@@ -90,6 +94,9 @@ public class BubbleMovement : MonoBehaviour
         float thisModifier = (isGiant ? 0.5f : 1) * (otherGiant ? 1.5f : 1);
         float otherModifier = (otherGiant ? 0.5f : 1) * (isGiant ? 1.5f : 1);
 
+        audio.pitch = UnityEngine.Random.Range(initialPitch * 0.8f, initialPitch * 1.2f);
+        audio.volume = body.velocity.magnitude/5f - 0.25f;
+        audio.Play();
         if (body.velocity.magnitude > collision.rigidbody.velocity.magnitude)
 		{
 			if(body.velocity.magnitude < 5)
