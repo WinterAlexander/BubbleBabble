@@ -18,7 +18,6 @@ public class BubbleMovement : MonoBehaviour
 	private Rigidbody body;
 
 	private bool collisionHandled = false;
-	private bool wasGiant = false;
 
     private int controllerId;
 
@@ -60,11 +59,7 @@ public class BubbleMovement : MonoBehaviour
                        isGiant ? 2f : 1f, 
 					   (isGiant ? 2f : 1f) * (1f - Mathf.Sin(Time.time * 2 * Mathf.PI) / 20f - 0.05f), 
 					   isGiant ? 2f * squish : squish);
-
-		if(wasGiant && !isGiant)
-			transform.position -= new Vector3(0, 0.5f, 0);
-
-		wasGiant = isGiant;
+        
 		collisionHandled = false;
 	}
 	
@@ -77,7 +72,7 @@ public class BubbleMovement : MonoBehaviour
 
 		bool isGiant = GetComponent<PowerUpComponent>().isGiant();
 
-		if(collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player")
 		{	
 			if(collisionHandled)
 				return;

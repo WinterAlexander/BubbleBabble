@@ -22,6 +22,10 @@ public class DynamicCameraComponent : MonoBehaviour
 	{
 		pos.Set(0, 0, 0);
 
+        float minX, maxX;
+        float minY, maxY;
+        float minZ, maxZ;
+
 		if(checkAlives.GetPlayers().Count != 0)
 		{
 			foreach(GameObject player in checkAlives.GetPlayers())
