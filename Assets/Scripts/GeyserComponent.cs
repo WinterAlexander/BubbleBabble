@@ -33,9 +33,9 @@ public class GeyserComponent : MonoBehaviour {
             {
                 float dis = MathUtils.XZDist(p.transform.position, gameObject.transform.position);
 
-                if (dis <= 0.75 && p.transform.position.y >= startHeight - 0.75f && p.transform.position.y <= ceilingHeight)
+                if (dis <= 0.75 && p.transform.position.y >= startHeight - 0.75f && p.transform.position.y <= ceilingHeight && p.GetComponent<Rigidbody>().velocity.y < 5)
                 {
-                    p.GetComponent<Rigidbody>().AddForce(new Vector3(0, 0.35f, 0), ForceMode.Impulse);
+                    p.GetComponent<Rigidbody>().velocity = new Vector3(0, 8, 0);
                 }
             }
         }        
