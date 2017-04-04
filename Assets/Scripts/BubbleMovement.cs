@@ -40,11 +40,15 @@ public class BubbleMovement : MonoBehaviour
 
 		moveDirection.Set(Input.GetAxis("Horizontal_" + controllerId), 0, Input.GetAxis("Vertical_" + controllerId));
 
-		if(moveDirection.magnitude > 0.1 && onGround())
+		if(moveDirection.magnitude > 0.1)
 		{
 			transform.LookAt(moveDirection + transform.position);
 			transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
 			moveDirection *= acc;
+
+            if(!onGround())
+                moveDirection *= 0.1f;
+
 
 			if(body.velocity.magnitude < topSpeed + (isGiant ? -1 : 0))
 				body.AddForce(moveDirection);
@@ -110,7 +114,6 @@ public class BubbleMovement : MonoBehaviour
 
 	bool onGround()
 	{
-		return true; //TODO not working
-		//return Physics.Raycast(transform.position, -Vector3.up, GetComponent<SphereCollider>().radius + 1f);
+		return Physics.Raycast(transform.position, -Vector3.up, GetComponent<SphereCollider>().radius + 1f);
 	}
 }
