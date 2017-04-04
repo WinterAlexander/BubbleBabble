@@ -78,10 +78,6 @@ public class PowerUpComponent : MonoBehaviour
 				}
 				break;
 
-			//case PowerUpType.GRABULLE:
-
-		        //break;
-
 			case PowerUpType.TOURBULLE:
 		        if(Input.GetButton("Fire" + controllerId) && !isGeysed())
 		        {
