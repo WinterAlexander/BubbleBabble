@@ -76,39 +76,33 @@ public class BubbleMovement : MonoBehaviour
 
 		bool isGiant = GetComponent<PowerUpComponent>().isGiant();
 
-        if (collision.gameObject.tag == "Player")
-		{	
-			if(collisionHandled)
-				return;
+        if(collision.gameObject.tag != "Player")
+            return;
+        
+		if(collisionHandled)
+			return;
 	
-			if(collisionParticles != null)
-				Destroy(Instantiate(collisionParticles, transform.position, collisionParticles.transform.rotation), 5.1f);
+		if(collisionParticles != null)
+			Destroy(Instantiate(collisionParticles, transform.position, collisionParticles.transform.rotation), 5.1f);
 
-			bool otherGiant = collision.gameObject.GetComponent<PowerUpComponent>().isGiant();
-			
-			if(isGiant && !otherGiant)
+		bool otherGiant = collision.gameObject.GetComponent<PowerUpComponent>().isGiant();
+
+        float thisModifier = (isGiant ? 0.5f : 1) * (otherGiant ? 1.5f : 1);
+        float otherModifier = (otherGiant ? 0.5f : 1) * (isGiant ? 1.5f : 1);
+
+        if (body.velocity.magnitude > collision.rigidbody.velocity.magnitude)
+		{
+			if(body.velocity.magnitude < 5)
 			{
-				collision.rigidbody.velocity *= 2f;
-				collision.gameObject.GetComponent<BubbleMovement>().collisionHandled = true;
-				collisionHandled = true;
+				collision.rigidbody.velocity = -body.velocity.normalized * 3 * otherModifier;
+				body.velocity = body.velocity.normalized * 5 * thisModifier;
 				return;
 			}
-			
-			if(body.velocity.magnitude > collision.rigidbody.velocity.magnitude)
-			{
-				if(body.velocity.magnitude < 5)
-				{
-					collision.rigidbody.velocity = -body.velocity.normalized * 3;
-					body.velocity = body.velocity.normalized * 5;
-					return;
-				}
 				
-				collision.rigidbody.velocity = -body.velocity;
-				body.velocity *= 1.5f;
-				collision.gameObject.GetComponent<BubbleMovement>().collisionHandled = true;
-				collisionHandled = true;
-				return;
-			}
+			collision.rigidbody.velocity = body.velocity * -otherModifier;
+			body.velocity *= 1.5f * thisModifier;
+			collision.gameObject.GetComponent<BubbleMovement>().collisionHandled = true;
+			collisionHandled = true;
 		}
 	}
 
