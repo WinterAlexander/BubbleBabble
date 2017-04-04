@@ -36,6 +36,10 @@ public class DynamicCameraComponent : MonoBehaviour
 		softPos += pos * (1f - value);
 
 		transform.position = original + softPos;
+        transform.position = new Vector3(transform.position.x,
+                                        transform.position.y + Math.Abs(transform.position.x) + Math.Abs(transform.position.z),
+                                        transform.position.z - 8);
+        //TODO better cam, this is temp since last cam we couldnt see shit in map
 		//transform.eulerAngles.Set(0, transform.eulerAngles.y, 0);
 	}
 }
