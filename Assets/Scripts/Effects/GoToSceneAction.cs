@@ -7,11 +7,12 @@ using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts.Effects
 {
-    class GoToMenuAction : OnFreezeEndAction
+    class GoToSceneAction : OnFreezeEndAction
     {
+        public string scene;
         public void Act()
         {
-            SceneManager.LoadScene("Menu");
+            SceneManager.LoadScene(scene);
         }
     }
 }

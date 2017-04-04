@@ -61,11 +61,14 @@ public class CheckAlives : MonoBehaviour
 	{
         finished = true;
 
-        Freeze.FreezeFrame(5f);
+        Freeze.FreezeFrame(3f);
         Freeze.FreezeComponent fc = Camera.main.gameObject.GetComponent<Freeze.FreezeComponent>();
         if(fc.action == null)
         {
-            fc.action = new GoToMenuAction();
+            GoToSceneAction sceneAction = new GoToSceneAction();
+            sceneAction.scene = "BattleRoyale";
+            fc.action = sceneAction;
+            
             GameObject winnerCanvas = GameObject.Find("WinnerCanvas");
             Text text = winnerCanvas.GetComponentInChildren<Text>();
             string couleur = "";
