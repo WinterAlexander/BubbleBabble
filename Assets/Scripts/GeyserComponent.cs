@@ -6,14 +6,18 @@ using UnityEngine;
 public class GeyserComponent : MonoBehaviour {
 
     private GameObject emitter;
-    public float deadTime = 8f;
-    public float secondsActive = 6f;
+    private GameObject preEmitter;
+    private float deadTime = 8f;
+    private float secondsActive = 6f;
+    private float ceilingHeight;
     private float startHeight;
     private bool isGeysing;
 
     void Start () {
         emitter = gameObject.GetComponentsInChildren<Transform>()[1].gameObject;
+        preEmitter = gameObject.GetComponentsInChildren<Transform>()[2].gameObject;
         startHeight = emitter.transform.position.y;
+        ceilingHeight = startHeight + 7f;
         isGeysing = false;
         StartCoroutine(StartGeysing());      
     }
@@ -29,9 +33,9 @@ public class GeyserComponent : MonoBehaviour {
             {
                 float dis = MathUtils.XZDist(p.transform.position, gameObject.transform.position);
 
-                if (dis <= 1)
+                if (dis <= 0.75 && p.transform.position.y >= startHeight - 0.75f && p.transform.position.y <= ceilingHeight)
                 {
-                    p.GetComponent<Rigidbody>().AddForce(new Vector3(0, 15f, 0), ForceMode.Force);
+                    p.GetComponent<Rigidbody>().AddForce(new Vector3(0, 0.35f, 0), ForceMode.Impulse);
                 }
             }
         }        
@@ -40,6 +44,7 @@ public class GeyserComponent : MonoBehaviour {
     IEnumerator StartGeysing()
     {
         isGeysing = true;
+        preEmitter.GetComponent<ParticleSystem>().Stop();
         emitter.GetComponent<ParticleSystem>().Play();
         yield return new WaitForSeconds(secondsActive);
         StartCoroutine(Wait());
@@ -62,6 +67,7 @@ public class GeyserComponent : MonoBehaviour {
     {
         isGeysing = false;
         emitter.GetComponent<ParticleSystem>().Stop();
+        preEmitter.GetComponent<ParticleSystem>().Play();
         yield return new WaitForSeconds(deadTime);
         StartCoroutine(StartGeysing());
     }
