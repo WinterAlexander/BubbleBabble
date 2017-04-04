@@ -63,7 +63,7 @@ public class PowerUpComponent : MonoBehaviour
                 break;
 
 			case PowerUpType.SHOTBULLE:
-		        if(Input.GetButton("Fire" + controllerId) && !isGeysed())
+		        if(Input.GetButton("Fire" + controllerId))
 		        {
 			        ShootABubble();
 			        type = PowerUpType.NONE;
@@ -71,7 +71,7 @@ public class PowerUpComponent : MonoBehaviour
 		        break;
 
 			case PowerUpType.BAZOUBULLE:
-				if(Input.GetButton("Fire" + controllerId) && !isGeysed())
+				if(Input.GetButton("Fire" + controllerId))
 				{
 					Bazoubulle();
 					type = PowerUpType.NONE;
@@ -79,7 +79,7 @@ public class PowerUpComponent : MonoBehaviour
 				break;
 
 			case PowerUpType.TOURBULLE:
-		        if(Input.GetButton("Fire" + controllerId) && !isGeysed())
+		        if(Input.GetButton("Fire" + controllerId))
 		        {
 					Tourbillon();
 					type = PowerUpType.NONE;
@@ -174,10 +174,5 @@ public class PowerUpComponent : MonoBehaviour
         string name = obj.name;
         playerId = System.Int32.Parse(name[name.Length - 1].ToString());
         return playerId;
-    }
-
-    private bool isGeysed()
-    {
-        return GeyserComponent.beingGeysed.Contains(gameObject.GetComponentInParent<Transform>());
     }
 }
