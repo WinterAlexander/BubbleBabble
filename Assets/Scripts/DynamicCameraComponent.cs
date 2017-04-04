@@ -6,7 +6,7 @@ using UnityEngine;
 public class DynamicCameraComponent : MonoBehaviour
 {
 	private CheckAlives checkAlives;
-	private Vector3 pos, softPos;
+	private Vector3 softPos;
 
 	public float transitionRate = 0.95f;
 
@@ -14,38 +14,25 @@ public class DynamicCameraComponent : MonoBehaviour
 	void Start()
 	{
 		checkAlives = GameObject.FindWithTag("WorldController").GetComponent<CheckAlives>();
+        softPos = transform.position;
 	}
 	
 	// Update is called once per frame
 	void Update()
 	{
-		pos.Set(0, 0, 0);
-
-        float avgX = 0, avgY = 0, avgZ = 0;
+        Vector3 avg = new Vector3();
 
         ArrayList players = checkAlives.GetPlayers();
 
-
         foreach (GameObject player in players)
-        {
-            avgX += player.transform.position.x;
-            avgY += player.transform.position.y;
-            avgZ += player.transform.position.z;
-        }
+            avg += player.transform.position;
 
-        int count = players.Count;
+        avg /= players.Count;
 
-        avgX /= count;
-        avgY /= count;
-        avgZ /= count;
-
-        transform.position = new Vector3(avgX, avgY, avgZ);
-        transform.position -= transform.forward * 8;
+        transform.position = avg - transform.forward * 8;
 
         while(!BoundsInCamera(players))
-        {
              transform.position -= transform.forward;
-        }
 
         float value = Mathf.Pow(1f - transitionRate, Time.deltaTime);
     
