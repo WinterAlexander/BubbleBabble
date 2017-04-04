@@ -17,7 +17,7 @@ public class GeyserComponent : MonoBehaviour {
         emitter = gameObject.GetComponentsInChildren<Transform>()[1].gameObject;
         preEmitter = gameObject.GetComponentsInChildren<Transform>()[2].gameObject;
         startHeight = emitter.transform.position.y;
-        ceilingHeight = startHeight + 7f;
+        ceilingHeight = startHeight + 5f;
         isGeysing = false;
         StartCoroutine(StartGeysing());      
     }

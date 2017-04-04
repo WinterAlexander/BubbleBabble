@@ -1,4 +1,5 @@
-﻿using Assets.Scripts;
+﻿using Assets;
+using Assets.Scripts;
 using Assets.Scripts.Effects;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,17 +18,26 @@ public class CheckAlives : MonoBehaviour
 	void Start()
 	{
 		players = new ArrayList(GameObject.FindGameObjectsWithTag("Player"));
-        playerId = new GameObject[players.Count];
+
+        playerId = new GameObject[Config.playerCount];
         
         for(int i = 0; i < players.Count; i++)
         {
             string name = ((GameObject)players[i]).name;
             int id = System.Int32.Parse(name[name.Length - 1].ToString());
-            playerId[id - 1] = (GameObject)players[i];
+            if (id <= Config.playerCount)
+            {
+                playerId[id - 1] = (GameObject)players[i];            
+            }
+            else
+            {GameObject.Destroy((GameObject)players[i]);
+                players.Remove(players[i]);
+                i--;      
+            }
         }
-	}
+    }
 
-	void Update()
+    void Update()
 	{
         if (finished)
             return;
@@ -73,6 +83,7 @@ public class CheckAlives : MonoBehaviour
             Text text = winnerCanvas.GetComponentInChildren<Text>();
             string couleur = "";
             
+            //TODO Redo This
             switch(winner)
             {
                 case 0:

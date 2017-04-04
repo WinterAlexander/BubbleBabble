@@ -34,6 +34,8 @@ public class Selection : MonoBehaviour {
                 SceneManager.LoadScene("BattleRoyale");
             else if(selected == 1)
                 SceneManager.LoadScene("Tutorial");
+            else if (selected == 2)
+                SceneManager.LoadScene("Options");
         }
 
         float d = Input.GetAxis("Vertical_All");
