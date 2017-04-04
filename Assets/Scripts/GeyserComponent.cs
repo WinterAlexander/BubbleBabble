@@ -6,12 +6,10 @@ using UnityEngine;
 public class GeyserComponent : MonoBehaviour {
 
     private GameObject emitter;
-    public float deadTime = 12f;
-    public float secondsToWait = 4f;
+    public float deadTime = 8f;
+    public float secondsActive = 6f;
     private float startHeight;
     private bool isGeysing;
-
-    public static List<Transform> beingGeysed = new List<Transform>();
 
     void Start () {
         emitter = gameObject.GetComponentsInChildren<Transform>()[1].gameObject;
@@ -31,10 +29,9 @@ public class GeyserComponent : MonoBehaviour {
             {
                 float dis = MathUtils.XZDist(p.transform.position, gameObject.transform.position);
 
-                if (dis <= 1 && !beingGeysed.Contains(p.transform))
+                if (dis <= 1)
                 {
-                    beingGeysed.Add(p.transform);
-                    StartCoroutine(Raise(p.transform));
+                    p.GetComponent<Rigidbody>().AddForce(new Vector3(0, 15f, 0), ForceMode.Force);
                 }
             }
         }        
@@ -44,22 +41,22 @@ public class GeyserComponent : MonoBehaviour {
     {
         isGeysing = true;
         emitter.GetComponent<ParticleSystem>().Play();
-        yield return new WaitForSeconds(secondsToWait);
+        yield return new WaitForSeconds(secondsActive);
         StartCoroutine(Wait());
     }
 
-    IEnumerator Raise(Transform transform)
-    {
-        for(int i = 0; i < 240 && isGeysing; i++)
-        {
-            transform.position = new Vector3(emitter.transform.position.x,
-                                            startHeight + i / 50.0f,
-                                            emitter.transform.position.z);
-            yield return null;
-        }
-        transform.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        beingGeysed.Remove(transform);
-    }
+    //IEnumerator Raise(Transform transform)
+    //{
+    //    for(int i = 0; i < 240 && isGeysing; i++)
+    //    {
+    //        transform.position = new Vector3(emitter.transform.position.x,
+    //                                        startHeight + i / 50.0f,
+    //                                        emitter.transform.position.z);
+    //        yield return null;
+    //    }
+    //    transform.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+    //    beingGeysed.Remove(transform);
+    //}
 
     IEnumerator Wait()
     {
