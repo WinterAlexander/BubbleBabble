@@ -20,12 +20,13 @@ public class PowerUpComponent : MonoBehaviour
 	public GameObject tourbillon;
 
 	private Rigidbody body;
-    public int playerId;
+    private int playerId; //crap for UI
 
-	private int controllerId;
+	private int controllerId; //actual player id
+    private GameObject[] images;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         type = PowerUpType.NONE;
         hasTimedPowerUp = false;
 
@@ -33,13 +34,13 @@ public class PowerUpComponent : MonoBehaviour
         playerId = IdFromName(gameObject) - 1;
 
 		controllerId = GetComponent<PlayerComponent>().playerId;
+        images = GameObject.FindGameObjectsWithTag("UIImage");
 
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        GameObject[] images = GameObject.FindGameObjectsWithTag("UIImage");
-        
+
         foreach (GameObject g in images)
         {
             Image im = g.GetComponent<Image>();
@@ -55,11 +56,9 @@ public class PowerUpComponent : MonoBehaviour
         
         switch(type)
         {
-            case PowerUpType.GIANT_BUBBLE :
-                    if (!hasTimedPowerUp)
+            case PowerUpType.GIANT_BUBBLE:
+                    if(!hasTimedPowerUp)
                         StartCoroutine(BeingGiant());
-
-                    gameObject.transform.localScale = new Vector3(2, 2, 2);
                 break;
 
 			case PowerUpType.SHOTBULLE:
@@ -158,6 +157,7 @@ public class PowerUpComponent : MonoBehaviour
 	IEnumerator BeingGiant()
     {
         hasTimedPowerUp = true;
+        transform.position += new Vector3(0, 0.5f, 0);
         yield return new WaitForSeconds(10);
 
         type = PowerUpType.NONE;
@@ -172,7 +172,7 @@ public class PowerUpComponent : MonoBehaviour
     private int IdFromName(GameObject obj)
     {
         string name = obj.name;
-        playerId = System.Int32.Parse(name[name.Length - 1].ToString());
+        playerId = int.Parse(name[name.Length - 1].ToString());
         return playerId;
     }
 
