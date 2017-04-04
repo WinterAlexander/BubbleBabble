@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerComponent : MonoBehaviour
 {
+    public int playerId;
 	public bool alive = true;
 
 	// Use this for initialization

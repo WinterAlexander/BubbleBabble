@@ -7,7 +7,6 @@ public class BubbleMovement : MonoBehaviour
 {
 	public float acc = 25f;
 	public float topSpeed = 5f;
-	public int controllerId = 1;
 
 	public GameObject collisionParticles;
 
@@ -21,9 +20,12 @@ public class BubbleMovement : MonoBehaviour
 	private bool collisionHandled = false;
 	private bool wasGiant = false;
 
+    private int controllerId;
+
 	void Start()
 	{
         body = GetComponent<Rigidbody>();
+        controllerId = GetComponent<PlayerComponent>().playerId;
 	}
 
 	void Update()
@@ -95,10 +97,10 @@ public class BubbleMovement : MonoBehaviour
 			
 			if(body.velocity.magnitude > collision.rigidbody.velocity.magnitude)
 			{
-				if(body.velocity.magnitude < 2)
+				if(body.velocity.magnitude < 5)
 				{
-					collision.rigidbody.velocity = collision.rigidbody.velocity.normalized * 10;
-					body.velocity = body.velocity.normalized * 15;
+					collision.rigidbody.velocity = -body.velocity.normalized * 3;
+					body.velocity = body.velocity.normalized * 5;
 					return;
 				}
 				

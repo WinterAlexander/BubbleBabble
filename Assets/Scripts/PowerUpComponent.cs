@@ -32,7 +32,7 @@ public class PowerUpComponent : MonoBehaviour
 		body = GetComponent<Rigidbody>();
         playerId = IdFromName(gameObject) - 1;
 
-		controllerId = GetComponent<BubbleMovement>().controllerId;
+		controllerId = GetComponent<PlayerComponent>().playerId;
 
 	}
 	
