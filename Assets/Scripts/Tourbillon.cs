@@ -9,6 +9,9 @@ public class Tourbillon : MonoBehaviour
 
 	public Vector3 velocity;
 
+	public GameObject thrower;
+	public int life = 800;
+
 	// Use this for initialization
 	void Start()
 	{
@@ -18,12 +21,26 @@ public class Tourbillon : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		if(life < 0)
+			return;
+
+		if(life == 0)
+		{
+			GetComponent<ParticleSystem>().Stop();
+			Destroy(gameObject, 1f);
+			life--;
+			return;
+		}
+
 		transform.Rotate(Vector3.forward, 270 * Time.deltaTime);
 
 		transform.position += velocity * Time.deltaTime;
 
 		foreach(GameObject player in GameObject.Find("WorldController").GetComponent<CheckAlives>().GetPlayers())
 		{
+			if(thrower == player)
+				continue;
+
 			Vector3 drag = transform.position - player.transform.position;
 
 			drag.y = 0;
@@ -38,5 +55,7 @@ public class Tourbillon : MonoBehaviour
 
 			player.GetComponent<Rigidbody>().AddForce(drag, ForceMode.VelocityChange);
 		}
+
+		life--;
 	}
 }

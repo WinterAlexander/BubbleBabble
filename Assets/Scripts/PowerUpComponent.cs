@@ -17,9 +17,12 @@ public class PowerUpComponent : MonoBehaviour
 	public GameObject particleShooter;
 	public GameObject bazoubulle;
 	public GameObject bazoubulleExplosion;
+	public GameObject tourbillon;
 
 	private Rigidbody body;
     public int playerId;
+
+	private int controllerId;
 
 	// Use this for initialization
 	void Start () {
@@ -28,7 +31,10 @@ public class PowerUpComponent : MonoBehaviour
 
 		body = GetComponent<Rigidbody>();
         playerId = IdFromName(gameObject) - 1;
-    }
+
+		controllerId = GetComponent<BubbleMovement>().controllerId;
+
+	}
 	
 	// Update is called once per frame
 	void Update () {
@@ -57,7 +63,7 @@ public class PowerUpComponent : MonoBehaviour
                 break;
 
 			case PowerUpType.SHOTBULLE:
-		        if(Input.GetButton("Fire1"))
+		        if(Input.GetButton("Fire" + controllerId) && !isGeysed())
 		        {
 			        ShootABubble();
 			        type = PowerUpType.NONE;
@@ -65,20 +71,28 @@ public class PowerUpComponent : MonoBehaviour
 		        break;
 
 			case PowerUpType.BAZOUBULLE:
-				if(Input.GetButton("Fire1"))
+				if(Input.GetButton("Fire" + controllerId) && !isGeysed())
 				{
 					Bazoubulle();
 					type = PowerUpType.NONE;
 				}
 				break;
 
-			case PowerUpType.GRABULLE:
+			//case PowerUpType.GRABULLE:
 
+		        //break;
+
+			case PowerUpType.TOURBULLE:
+		        if(Input.GetButton("Fire" + controllerId) && !isGeysed())
+		        {
+					Tourbillon();
+					type = PowerUpType.NONE;
+		        }
 		        break;
 
 			default:
-				type = PowerUpType.NONE;
-				break;
+			    type = PowerUpType.NONE;
+		        break;
         }
 	}
 
@@ -120,6 +134,7 @@ public class PowerUpComponent : MonoBehaviour
 			return;
 		lastShoot = Time.frameCount;
 
+
 		GameObject clone = Instantiate(bazoubulle, transform.position - new Vector3(0, 0.25f, 0) + transform.forward, transform.rotation);
 
 		clone.GetComponent<Bazoubulle>().baseVel = new Vector3(transform.forward.x * 20, 0, transform.forward.z * 20);
@@ -129,6 +144,19 @@ public class PowerUpComponent : MonoBehaviour
 		body.AddForce(transform.forward.x * -2, 0, transform.forward.y * -2, ForceMode.Impulse);
 
 		Destroy(clone, 30f);
+	}
+
+	void Tourbillon()
+	{
+		if(lastShoot != -1 && lastShoot + 20 > Time.frameCount)
+			return;
+		lastShoot = Time.frameCount;
+
+
+		GameObject clone = Instantiate(tourbillon, transform.position, tourbillon.transform.rotation);
+
+		clone.GetComponent<Tourbillon>().velocity = new Vector3(transform.forward.x, 0, transform.forward.z);
+		clone.GetComponent<Tourbillon>().thrower = gameObject;
 	}
 
 	IEnumerator BeingGiant()
@@ -150,5 +178,10 @@ public class PowerUpComponent : MonoBehaviour
         string name = obj.name;
         playerId = System.Int32.Parse(name[name.Length - 1].ToString());
         return playerId;
+    }
+
+    private bool isGeysed()
+    {
+        return GeyserComponent.beingGeysed.Contains(gameObject.GetComponentInParent<Transform>());
     }
 }

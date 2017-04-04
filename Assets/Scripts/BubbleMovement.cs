@@ -39,7 +39,7 @@ public class BubbleMovement : MonoBehaviour
 
 		moveDirection.Set(Input.GetAxis("Horizontal_" + controllerId), 0, Input.GetAxis("Vertical_" + controllerId));
 
-		if(moveDirection.magnitude > 0.1)
+		if(moveDirection.magnitude > 0.1 && onGround())
 		{
 			//moveDirection = transform.TransformDirection(moveDirection);
 			transform.LookAt(moveDirection + transform.position);
@@ -80,6 +80,8 @@ public class BubbleMovement : MonoBehaviour
 	
 	void OnCollisionEnter(Collision collision)
 	{
+		//TODO disable y bouncing at all
+
 		if(collision.relativeVelocity.y > 0.5)
 			return;
 
@@ -108,5 +110,11 @@ public class BubbleMovement : MonoBehaviour
 					bubbleCollision = collision.relativeVelocity*1.25f;
 			}
 		}
+	}
+
+	bool onGround()
+	{
+		return true; //TODO not working
+		//return Physics.Raycast(transform.position, -Vector3.up, GetComponent<SphereCollider>().radius + 1f);
 	}
 }
