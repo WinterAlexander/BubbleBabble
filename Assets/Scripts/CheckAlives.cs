@@ -17,7 +17,8 @@ public class CheckAlives : MonoBehaviour
 
 	void Start()
 	{
-		players = new ArrayList(GameObject.FindGameObjectsWithTag("Player"));
+        GameObject[] images = GameObject.FindGameObjectsWithTag("UIImage");
+        players = new ArrayList(GameObject.FindGameObjectsWithTag("Player"));
 
         playerId = new GameObject[Config.playerCount];
         
@@ -30,7 +31,21 @@ public class CheckAlives : MonoBehaviour
                 playerId[id - 1] = (GameObject)players[i];            
             }
             else
-            {GameObject.Destroy((GameObject)players[i]);
+            {
+
+                for(int j = 0; j < images.Length; j++)
+                {
+                    string imName = images[j].name;
+                    
+                    int imId = int.Parse(imName[imName.Length - 1].ToString());
+           
+                    if (imId == id - 1)
+                    {
+                        GameObject.Destroy((GameObject)images[j].GetComponent<Transform>().parent.gameObject);
+                        break;
+                    }
+                }
+                GameObject.Destroy((GameObject)players[i]);
                 players.Remove(players[i]);
                 i--;      
             }

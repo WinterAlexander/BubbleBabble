@@ -43,6 +43,7 @@ public class PowerUpComponent : MonoBehaviour
 
         foreach (GameObject g in images)
         {
+            if (g == null) continue;
             Image im = g.GetComponent<Image>();
 
             int imageID = IdFromName(g);
