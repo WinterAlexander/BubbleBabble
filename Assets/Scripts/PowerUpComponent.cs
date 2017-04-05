@@ -57,7 +57,7 @@ public class PowerUpComponent : MonoBehaviour
         
         switch(type)
         {
-            case PowerUpType.GIANT_BUBBLE:
+            case PowerUpType.GROSSE_BULLE:
                     if(!hasTimedPowerUp)
                         StartCoroutine(BeingGiant());
                 break;
@@ -85,6 +85,14 @@ public class PowerUpComponent : MonoBehaviour
 					type = PowerUpType.NONE;
 		        }
 		        break;
+
+            case PowerUpType.BULLE_POUND:
+                if (Input.GetButton("Button_A_" + controllerId))
+                {
+                    StartCoroutine(GronPond());
+                    type = PowerUpType.NONE;
+                }
+                break;
 
 			default:
 			    type = PowerUpType.NONE;
@@ -155,7 +163,15 @@ public class PowerUpComponent : MonoBehaviour
 		clone.GetComponent<Tourbillon>().thrower = gameObject;
 	}
 
-	IEnumerator BeingGiant()
+    IEnumerator GronPond()
+    {
+        body.velocity = new Vector3(transform.forward.x * 3, 12, transform.forward.z * 3);
+        yield return new WaitForSeconds(1);
+        body.velocity = new Vector3(0, -20, 0);
+    }
+
+
+    IEnumerator BeingGiant()
     {
         hasTimedPowerUp = true;
         transform.position += new Vector3(0, 0.5f, 0);
@@ -167,7 +183,7 @@ public class PowerUpComponent : MonoBehaviour
 
 	public bool isGiant()
 	{
-		return type == PowerUpType.GIANT_BUBBLE;
+		return type == PowerUpType.GROSSE_BULLE;
 	}
 
     private int IdFromName(GameObject obj)

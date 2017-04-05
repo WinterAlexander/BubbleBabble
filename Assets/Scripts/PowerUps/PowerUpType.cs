@@ -8,9 +8,10 @@ namespace Assets
     public enum PowerUpType
     {
         NONE,
-        GIANT_BUBBLE,
+        GROSSE_BULLE,
         SHOTBULLE,
         BAZOUBULLE,
-        TOURBULLE
+        TOURBULLE,
+        BULLE_POUND
     }
 }
