@@ -9,7 +9,8 @@ public class BubbleMovement : MonoBehaviour
 	public float topSpeed = 5f;
 
 	public GameObject collisionParticles;
-
+    public AudioClip metalSound;
+    public AudioClip bubbleSound;
 	public float transitionRate = 0.90f;
 
 	private Vector3 moveDirection;
@@ -81,7 +82,11 @@ public class BubbleMovement : MonoBehaviour
 		bool isGiant = GetComponent<PowerUpComponent>().isGiant();
 
         if(collision.gameObject.tag != "Player")
+        {
+
             return;
+        }
+            
         
 		if(collisionHandled)
 			return;
@@ -94,6 +99,7 @@ public class BubbleMovement : MonoBehaviour
         float thisModifier = (isGiant ? 0.5f : 1) * (otherGiant ? 1.5f : 1);
         float otherModifier = (otherGiant ? 0.5f : 1) * (isGiant ? 1.5f : 1);
 
+        audio.clip = bubbleSound;
         audio.pitch = UnityEngine.Random.Range(initialPitch * 0.8f, initialPitch * 1.2f);
         audio.volume = body.velocity.magnitude/5f - 0.25f;
         audio.Play();
@@ -109,8 +115,8 @@ public class BubbleMovement : MonoBehaviour
 			collision.rigidbody.velocity = body.velocity * -otherModifier;
 			body.velocity *= 1.5f * thisModifier;
 			collision.gameObject.GetComponent<BubbleMovement>().collisionHandled = true;
-			collisionHandled = true;
-		}
+			collisionHandled = true;           
+        }
 	}
 
 	bool onGround()

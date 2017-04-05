@@ -11,7 +11,7 @@ public class CheckAlives : MonoBehaviour
 {
     public float deadHeight = -2;
     public bool finished = false;
-    public string winningText = "Joueur {0} wins!";
+    public string winningText = "{0} a gagné!";
     private ArrayList players;
     private GameObject[] playerId;
 
@@ -87,16 +87,16 @@ public class CheckAlives : MonoBehaviour
             switch(winner)
             {
                 case 0:
-                    couleur = "rouge";
+                    couleur = "Rouge";
                     break;
                 case 1:
-                    couleur = "bleu";
+                    couleur = "Bleu";
                     break;
                 case 2:
-                    couleur = "jaune";
+                    couleur = "Jaune";
                     break;
                 case 3:
-                    couleur = "vert";
+                    couleur = "Vert";
                     break;
             }
             text.text = string.Format(winningText, couleur);
