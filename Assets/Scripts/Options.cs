@@ -42,7 +42,6 @@ public class Options : MonoBehaviour {
                     break;
             }         
         }
-
         gameObject.GetComponentInChildren<Text>().text = string.Format(playerCountText, Config.playerCount);
     }
 

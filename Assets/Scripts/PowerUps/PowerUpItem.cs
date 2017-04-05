@@ -18,7 +18,7 @@ public class PowerUpItem : MonoBehaviour {
         ArrayList players = GameObject.FindWithTag("WorldController").GetComponent<CheckAlives>().GetPlayers();
         foreach (GameObject p in players)
         {
-            float dis = MathUtils.XZDist(p.transform.position, gameObject.transform.position);
+            float dis = Vector3.Distance(p.transform.position, gameObject.transform.position);
 
             if (dis < 1)
             {
