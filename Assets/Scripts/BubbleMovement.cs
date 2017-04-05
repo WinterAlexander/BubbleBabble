@@ -96,8 +96,8 @@ public class BubbleMovement : MonoBehaviour
 
 		bool otherGiant = collision.gameObject.GetComponent<PowerUpComponent>().isGiant();
 
-        float thisModifier = (isGiant ? 0.5f : 1) * (otherGiant ? 2f : 1);
-        float otherModifier = (otherGiant ? 0.5f : 1) * (isGiant ? 2f : 1);
+        float thisModifier = (isGiant ? 0.5f : 1) * (otherGiant ? 1.5f : 1);
+        float otherModifier = (otherGiant ? 0.5f : 1) * (isGiant ? 1.5f : 1);
 
         audio.clip = bubbleSound;
         audio.pitch = UnityEngine.Random.Range(initialPitch * 0.8f, initialPitch);
