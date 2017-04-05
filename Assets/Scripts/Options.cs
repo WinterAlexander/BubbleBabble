@@ -11,7 +11,7 @@ public class Options : MonoBehaviour {
     public string volumeText = "Volume : {0}";
     private int selection = 0;
     private bool isInBlock = false;
-    private float blockingTime = 0.35f;
+    private float blockingTime = 0.25f;
 	void Start () {
 		
 	}
@@ -19,7 +19,7 @@ public class Options : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (Input.GetButton("Submit") || Input.GetButton("Jump") || Input.GetButton("Fire1"))
+        if (Input.GetButton("Submit") || Input.GetButton("Jump") || Input.GetButton("Fire1") || Input.GetButton("Fire2") || Input.GetButton("Fire3"))
         {
             SceneManager.LoadScene("Menu");
         }
@@ -29,12 +29,12 @@ public class Options : MonoBehaviour {
             switch(selection)
             {
                 case 0:
-                    if (Input.GetAxis("Horizontal_1") > 0 && Config.playerCount < 4)
+                    if (Input.GetAxis("Horizontal_1") > 0.5f && Config.playerCount < 4)
                     {
                         Config.playerCount++;
                         StartCoroutine(Wait());
                     }
-                    else if (Input.GetAxis("Horizontal_1") < 0 && Config.playerCount > 2)
+                    else if (Input.GetAxis("Horizontal_1") < -0.5f && Config.playerCount > 2)
                     {
                         Config.playerCount--;
                         StartCoroutine(Wait());
