@@ -24,11 +24,12 @@ public class Selection : MonoBehaviour {
         }
      
         texts = titleRemover;
+        canMove = true;
     }
 
 	void Update ()
     {
-        if(Input.GetButtonDown("Submit"))
+        if(Input.GetButtonDown("Fire2"))
         {
             if (selected == 0)
                 SceneManager.LoadScene("BattleRoyale");
@@ -39,17 +40,16 @@ public class Selection : MonoBehaviour {
         }
 
         float d = Input.GetAxis("Vertical_All");
+     
 
-        if (d == 0)
-            canMove = true;
-        else if (canMove && d < 0){
-            selected++;
-            canMove = false;
-        }
-        else if (canMove && d > 0)
-        {
+        if (canMove && d >= 0.5f){
             selected--;
-            canMove = false;
+            StartCoroutine(Wait());
+        }
+        else if (canMove && d <= -0.5f)
+        {
+            selected++;
+            StartCoroutine(Wait());
         }    
 
         if (selected < 0)
@@ -66,4 +66,11 @@ public class Selection : MonoBehaviour {
                                                  i == selected ? Mathf.Abs(Mathf.Sin(Time.time)) * 0.2f + 1f : 1);
         }
 	}
+
+    IEnumerator Wait()
+    {
+        canMove = false;
+        yield return new WaitForSeconds(0.2f);
+        canMove = true;
+    }
 }
