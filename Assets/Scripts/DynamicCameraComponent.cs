@@ -20,8 +20,8 @@ public class DynamicCameraComponent : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-        Vector3 min = new Vector3(0, 0, 0),
-                max = new Vector3(0, 0, 0);
+        Vector3 min = new Vector3(100, 100, 100),
+                max = new Vector3(-100, -100, -100);
 
         ArrayList players = checkAlives.GetPlayers();
 
