@@ -65,32 +65,32 @@ public class PowerUpComponent : MonoBehaviour
 			case PowerUpType.SHOTBULLE:
 		        if(Input.GetButton("Button_A_" + controllerId))
 		        {
-			        ShootABubble();
 			        type = PowerUpType.NONE;
+			        ShootABubble();
 		        }
 		        break;
 
 			case PowerUpType.BAZOUBULLE:
 				if(Input.GetButton("Button_A_" + controllerId))
 				{
-					Bazoubulle();
 					type = PowerUpType.NONE;
+					Bazoubulle();
 				}
 				break;
 
 			case PowerUpType.TOURBULLE:
 		        if(Input.GetButton("Button_A_" + controllerId))
 		        {
-					Tourbillon();
 					type = PowerUpType.NONE;
+					Tourbillon();
 		        }
 		        break;
 
             case PowerUpType.BULLE_POUND:
-                if (Input.GetButton("Button_A_" + controllerId))
+                if(Input.GetButton("Button_A_" + controllerId))
                 {
-                    StartCoroutine(GronPond());
                     type = PowerUpType.NONE;
+                    StartCoroutine(GronPond());
                 }
                 break;
 
@@ -166,8 +166,11 @@ public class PowerUpComponent : MonoBehaviour
     IEnumerator GronPond()
     {
         body.velocity = new Vector3(transform.forward.x * 3, 12, transform.forward.z * 3);
+		
         yield return new WaitForSeconds(1);
-        body.velocity = new Vector3(0, -20, 0);
+		
+        body.velocity = new Vector3(0, -50, 0);
+		GetComponent<BullePoundComponent>().Pound();
     }
 
 

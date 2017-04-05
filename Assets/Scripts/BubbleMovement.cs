@@ -81,15 +81,9 @@ public class BubbleMovement : MonoBehaviour
 
 		bool isGiant = GetComponent<PowerUpComponent>().isGiant();
 
-        if(collision.gameObject.tag != "Player")
-        {
-
+        if(collisionHandled || collision.gameObject.tag != "Player")
             return;
-        }
-            
-        
-		if(collisionHandled)
-			return;
+           
 	
 		if(collisionParticles != null)
 			Destroy(Instantiate(collisionParticles, transform.position, collisionParticles.transform.rotation), 5.1f);
@@ -113,7 +107,7 @@ public class BubbleMovement : MonoBehaviour
         }
 	}
 
-	bool onGround()
+	public bool onGround()
 	{
 		return Physics.Raycast(transform.position, -Vector3.up, GetComponent<SphereCollider>().radius + 1f);
 	}
