@@ -20,14 +20,33 @@ public class DynamicCameraComponent : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-        Vector3 avg = new Vector3();
+        Vector3 min = new Vector3(0, 0, 0),
+                max = new Vector3(0, 0, 0);
 
         ArrayList players = checkAlives.GetPlayers();
 
-        foreach (GameObject player in players)
-            avg += player.transform.position;
+        foreach(GameObject player in players)
+        {
+            if(player.transform.position.x < min.x)
+                min.x = player.transform.position.x;
 
-        avg /= players.Count;
+            if (player.transform.position.y < min.y)
+                min.y = player.transform.position.y;
+
+            if(player.transform.position.z < min.z)
+                min.z = player.transform.position.z;
+
+            if(player.transform.position.x > max.x)
+                max.x = player.transform.position.x;
+
+            if(player.transform.position.y > max.y)
+                max.y = player.transform.position.y;
+
+            if(player.transform.position.z > max.z)
+                max.z = player.transform.position.z;
+        }
+
+        Vector3 avg = new Vector3((min.x + max.x) / 2, (min.y + max.y) / 2, (min.z + max.z) / 2);
 
         transform.position = avg - transform.forward * 8;
 

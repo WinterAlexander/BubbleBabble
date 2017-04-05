@@ -96,26 +96,20 @@ public class BubbleMovement : MonoBehaviour
 
 		bool otherGiant = collision.gameObject.GetComponent<PowerUpComponent>().isGiant();
 
-        float thisModifier = (isGiant ? 0.5f : 1) * (otherGiant ? 1.5f : 1);
-        float otherModifier = (otherGiant ? 0.5f : 1) * (isGiant ? 1.5f : 1);
+        float thisModifier = (isGiant ? 0.5f : 1) * (otherGiant ? 2f : 1);
+        float otherModifier = (otherGiant ? 0.5f : 1) * (isGiant ? 2f : 1);
 
         audio.clip = bubbleSound;
-        audio.pitch = UnityEngine.Random.Range(initialPitch * 0.8f, initialPitch * 1.2f);
-        audio.volume = body.velocity.magnitude/5f - 0.25f;
+        audio.pitch = UnityEngine.Random.Range(initialPitch * 0.8f, initialPitch);
+        audio.volume = body.velocity.magnitude / 5f - 0.25f;
         audio.Play();
-        if (body.velocity.magnitude > collision.rigidbody.velocity.magnitude)
+
+        if(body.velocity.magnitude > collision.rigidbody.velocity.magnitude)
 		{
-			if(body.velocity.magnitude < 5)
-			{
-				collision.rigidbody.velocity = -body.velocity.normalized * 3 * otherModifier;
-				body.velocity = body.velocity.normalized * 5 * thisModifier;
-				return;
-			}
-				
-			collision.rigidbody.velocity = body.velocity * -otherModifier;
-			body.velocity *= 1.5f * thisModifier;
+			collision.rigidbody.velocity = -body.velocity.normalized * 8 * otherModifier;
+            body.velocity = body.velocity.normalized * 12 * thisModifier;
 			collision.gameObject.GetComponent<BubbleMovement>().collisionHandled = true;
-			collisionHandled = true;           
+			collisionHandled = true;
         }
 	}
 

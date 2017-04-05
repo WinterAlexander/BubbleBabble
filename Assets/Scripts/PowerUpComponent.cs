@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PowerUpComponent : MonoBehaviour
 {
 	public static readonly float SHOTGUN_ANGLE = 50f;
-	public static readonly float SHOTGUN_REACH = 3f;
+	public static readonly float SHOTGUN_REACH = 4f;
     public Sprite[] icons = null;
 
 	public PowerUpType type;
@@ -110,7 +110,7 @@ public class PowerUpComponent : MonoBehaviour
 
 			if(Vector2.Angle(shootDir, playerDir) < SHOTGUN_ANGLE)
 			{
-				float force = player.GetComponent<PowerUpComponent>().isGiant() ? 10 : 14;
+				float force = player.GetComponent<PowerUpComponent>().isGiant() ? 12 : 16;
 
 				player.GetComponent<Rigidbody>().AddForce(shootDir.x * force, 0, shootDir.y * force, ForceMode.Impulse);
 			}
