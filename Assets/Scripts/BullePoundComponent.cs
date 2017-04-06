@@ -23,6 +23,7 @@ public class BullePoundComponent : MonoBehaviour
 			return;
 		
 		Destroy(Instantiate(poundParticles, transform.position, poundParticles.transform.rotation), 2.1f);
+		Shake.ShakeEffect(Camera.main.gameObject, 0.30f, 0.15f);
 		
 		foreach(GameObject player in worldController.GetComponent<CheckAlives>().GetPlayers())
 		{
