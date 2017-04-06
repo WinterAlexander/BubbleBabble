@@ -1,7 +1,5 @@
 fileFormatVersion: 2
 guid: 47b0b19340eff8a4984769f292012eaa
-timeCreated: 1491439996
-licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
@@ -72,9 +70,7 @@ ModelImporter:
     100128: pilier_2
     100130: Plane.011
     100132: Plane.026
-    100134: Plane.026_MeshPart0
-    100136: Plane.026_MeshPart1
-    100138: poutre_milieu
+    100134: poutre_milieu
     400000: basse_platforme
     400002: Camera
     400004: Cube
@@ -142,9 +138,7 @@ ModelImporter:
     400128: pilier_2
     400130: Plane.011
     400132: Plane.026
-    400134: Plane.026_MeshPart0
-    400136: Plane.026_MeshPart1
-    400138: poutre_milieu
+    400134: poutre_milieu
     2300000: basse_platforme
     2300002: Cube
     2300004: Cube.001
@@ -209,9 +203,8 @@ ModelImporter:
     2300122: pilier_1
     2300124: pilier_2
     2300126: Plane.011
-    2300128: Plane.026_MeshPart0
-    2300130: Plane.026_MeshPart1
-    2300132: poutre_milieu
+    2300128: Plane.026
+    2300130: poutre_milieu
     3300000: basse_platforme
     3300002: Cube
     3300004: Cube.001
@@ -276,9 +269,8 @@ ModelImporter:
     3300122: pilier_1
     3300124: pilier_2
     3300126: Plane.011
-    3300128: Plane.026_MeshPart0
-    3300130: Plane.026_MeshPart1
-    3300132: poutre_milieu
+    3300128: Plane.026
+    3300130: poutre_milieu
     4300000: hit_box_1
     4300002: hit_box_2
     4300004: hit_box_3
@@ -313,39 +305,39 @@ ModelImporter:
     4300062: Cylinder.004
     4300064: Cylinder.003
     4300066: Cube.025
-    4300068: Plane.026_MeshPart0
-    4300070: Plane.026_MeshPart1
-    4300072: Plane.011
-    4300074: Cube.021
-    4300076: Cube.020
-    4300078: Cube.019
-    4300080: Cube.018
-    4300082: Cube.017
-    4300084: Cube.016
-    4300086: Cube.015
-    4300088: Cube.014
-    4300090: Cube.013
-    4300092: Cube.012
-    4300094: Cube.011
-    4300096: Cube.010
-    4300098: Cube.009
-    4300100: Cube.008
-    4300102: Cube.007
-    4300104: Cube.006
-    4300106: Cube.005
-    4300108: Cube.004
-    4300110: Cylinder.002
-    4300112: Cylinder.001
-    4300114: Cylinder
-    4300116: Cube.003
-    4300118: Cube.002
-    4300120: Cube.001
-    4300122: Cube
-    4300124: poutre_milieu
-    4300126: pilier_1
-    4300128: pilier_2
-    4300130: haute_plateforme
-    4300132: basse_platforme
+    4300068: Plane.026
+    4300070: Plane.011
+    4300072: Cube.021
+    4300074: Cube.020
+    4300076: Cube.019
+    4300078: Cube.018
+    4300080: Cube.017
+    4300082: Cube.016
+    4300084: Cube.015
+    4300086: Cube.014
+    4300088: Cube.013
+    4300090: Cube.012
+    4300092: Cube.011
+    4300094: Cube.010
+    4300096: Cube.009
+    4300098: Cube.008
+    4300100: Cube.007
+    4300102: Cube.006
+    4300104: Cube.005
+    4300106: Cube.004
+    4300108: Cylinder.002
+    4300110: Cylinder.001
+    4300112: Cylinder
+    4300114: Cube.003
+    4300116: Cube.002
+    4300118: Cube.001
+    4300120: Cube
+    4300122: poutre_milieu
+    4300124: pilier_1
+    4300126: pilier_2
+    4300128: haute_plateforme
+    4300130: basse_platforme
+    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -370,7 +362,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
@@ -408,7 +400,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
