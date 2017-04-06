@@ -9,6 +9,7 @@ public class Bazoubulle : MonoBehaviour
 	public Vector3 baseVel;
 
 	public float targetingIntensity = 1f;
+	public float angle = 60;
 
 	// Use this for initialization
 	void Start ()
@@ -30,7 +31,7 @@ public class Bazoubulle : MonoBehaviour
 
 			Vector3 thisDiff = player.transform.position - transform.position;
 
-			if(thisDiff.magnitude < vecToClosest.magnitude && Vector3.Angle(thisDiff, GetComponent<Rigidbody>().velocity) < 90)
+			if(thisDiff.magnitude < vecToClosest.magnitude && Vector3.Angle(thisDiff, GetComponent<Rigidbody>().velocity) < angle)
 			{
 				closest = player;
 				vecToClosest = thisDiff;

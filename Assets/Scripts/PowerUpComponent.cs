@@ -169,7 +169,7 @@ public class PowerUpComponent : MonoBehaviour
 		
         yield return new WaitForSeconds(1);
 		
-        body.velocity = new Vector3(0, -50, 0);
+        body.velocity = new Vector3(0, -10, 0);
 		GetComponent<BullePoundComponent>().Pound();
     }
 

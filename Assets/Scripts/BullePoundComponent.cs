@@ -6,6 +6,8 @@ public class BullePoundComponent : MonoBehaviour
 {
 	private bool pounding = false;
 	
+	public static readonly float REACH = 5f;
+	
 	public GameObject poundParticles;
 	
 	private GameObject worldController;
@@ -29,7 +31,10 @@ public class BullePoundComponent : MonoBehaviour
 			
 			Vector3 shootDir = player.transform.position - transform.position;
 			
-			player.GetComponent<Rigidbody>().AddForce(shootDir.normalized * 10f, ForceMode.Impulse);
+			if(shootDir.magnitude > REACH)
+				continue;
+			
+			player.GetComponent<Rigidbody>().AddForce(shootDir.normalized * 15f, ForceMode.Impulse);
 		}
 		
 		pounding = false;
