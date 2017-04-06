@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,11 +8,11 @@ using UnityEngine.UI;
 public class Selection : MonoBehaviour {
 
     public int selected = 0;
-    public float titleAnimationSpeed;
+    public string playerCount = "Joueurs : {0}";
 
     private Text[] texts;
     private bool canMove;
-    private Text title;
+    private bool canChangePCount;
     private Camera cam;
  
 
@@ -19,16 +20,8 @@ public class Selection : MonoBehaviour {
 
         cam = Camera.main;
         texts = gameObject.GetComponentsInChildren<Text>();
-        title = texts[0];
-        Text[] titleRemover = new Text[texts.Length - 1];
-        
-        for(int i = 1; i < texts.Length; i++)
-        {
-            titleRemover[i - 1] = texts[i];
-        }
-     
-        texts = titleRemover;
         canMove = true;
+        canChangePCount = true;
     }
 
 	void Update ()
@@ -40,16 +33,38 @@ public class Selection : MonoBehaviour {
           );
 
         cam.transform.LookAt(new Vector3(0, 0, 5));
-
+        texts[1].text = string.Format(playerCount, Config.playerCount);
         if (Input.GetButtonDown("Fire2") || Input.GetButtonDown("Submit") || Input.GetButtonDown("Jump"))
         {
             if (selected == 0)
                 SceneManager.LoadScene("BattleRoyale");
-            else if(selected == 1)
-                SceneManager.LoadScene("Options");
+        }
+
+        if(selected == 1 && canChangePCount)
+        {
+            if (Input.GetAxis("Horizontal_1") > 0.5f && Config.playerCount < 4)
+            {
+                Config.playerCount++;
+                StartCoroutine(WaitTogglePlayer());
+            }
+            else if (Input.GetAxis("Horizontal_1") < -0.5f && Config.playerCount > 2)
+            {
+                Config.playerCount--;
+                StartCoroutine(WaitTogglePlayer());
+            }
         }
 
         float d = Input.GetAxis("Vertical_All");
+
+        if(Input.GetKey(KeyCode.DownArrow))
+        {
+            d = 1f;
+        }
+
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            d = -1f;
+        }
 
         if (canMove && d >= 0.5f){
             selected--;
@@ -59,27 +74,34 @@ public class Selection : MonoBehaviour {
         {
             selected++;
             StartCoroutine(Wait());
-        }    
+        }
 
+   
         if (selected < 0)
+        {
             selected = texts.Length - 1;
+        }     
         else if (selected >= texts.Length)
             selected = 0;
 
 		for(int i = 0; i < texts.Length; i++)
         {
             Text t = texts[i];
-            t.color = i == selected ? Color.cyan : Color.black;
-
-            t.transform.localScale = new Vector3(i == selected ? Mathf.Abs(Mathf.Sin(Time.time)) * 0.2f + 1f : 1,
-                                                 i == selected ? Mathf.Abs(Mathf.Sin(Time.time)) * 0.2f + 1f : 1);
+            t.fontStyle = i == selected ? FontStyle.Bold : FontStyle.Normal;
         }
 	}
 
     IEnumerator Wait()
     {
         canMove = false;
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.3f);
         canMove = true;
+    }
+
+    IEnumerator WaitTogglePlayer()
+    {
+        canChangePCount = false;
+        yield return new WaitForSeconds(0.3f);
+        canChangePCount = true;
     }
 }
