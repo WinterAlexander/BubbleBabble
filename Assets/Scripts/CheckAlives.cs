@@ -17,6 +17,7 @@ public class CheckAlives : MonoBehaviour
 
 	void Start()
 	{
+        GetComponent<AudioSource>().time = Config.musicTime;
         GameObject[] images = GameObject.FindGameObjectsWithTag("UIImage");
         players = new ArrayList(GameObject.FindGameObjectsWithTag("Player"));
 

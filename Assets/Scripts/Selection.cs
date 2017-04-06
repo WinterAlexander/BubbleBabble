@@ -14,7 +14,6 @@ public class Selection : MonoBehaviour {
     private bool canMove;
     private bool canChangePCount;
     private Camera cam;
- 
 
     void Start () {
 
@@ -37,7 +36,11 @@ public class Selection : MonoBehaviour {
         if (Input.GetButtonDown("Fire2") || Input.GetButtonDown("Submit") || Input.GetButtonDown("Jump"))
         {
             if (selected == 0)
+            {
+                Config.musicTime = GetComponent<AudioSource>().time;
                 SceneManager.LoadScene("BattleRoyale");
+            }
+                
         }
 
         if(selected == 1 && canChangePCount)
