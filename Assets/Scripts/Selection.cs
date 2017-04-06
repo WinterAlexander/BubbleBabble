@@ -12,8 +12,12 @@ public class Selection : MonoBehaviour {
     private Text[] texts;
     private bool canMove;
     private Text title;
+    private Camera cam;
+ 
 
-	void Start () {
+    void Start () {
+
+        cam = Camera.main;
         texts = gameObject.GetComponentsInChildren<Text>();
         title = texts[0];
         Text[] titleRemover = new Text[texts.Length - 1];
@@ -29,7 +33,15 @@ public class Selection : MonoBehaviour {
 
 	void Update ()
     {
-        if(Input.GetButtonDown("Fire2"))
+        cam.transform.position = new Vector3(
+              cam.transform.position.x + Mathf.Cos(Time.time / 20) / 100,
+              cam.transform.position.y + Mathf.Sin(Time.time)/500,
+              cam.transform.position.z + Mathf.Sin(Time.time)/500
+          );
+
+        cam.transform.LookAt(new Vector3(-92, 160 , 5));
+
+        if (Input.GetButtonDown("Fire2"))
         {
             if (selected == 0)
                 SceneManager.LoadScene("BattleRoyale");
