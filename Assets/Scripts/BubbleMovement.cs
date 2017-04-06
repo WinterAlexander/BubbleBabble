@@ -81,6 +81,12 @@ public class BubbleMovement : MonoBehaviour
 
 		bool isGiant = GetComponent<PowerUpComponent>().isGiant();
 
+        if(collision.gameObject.tag == "Bumper")
+        {
+            body.velocity *= 1.5f;
+            return;
+        }
+
         if(collisionHandled || collision.gameObject.tag != "Player")
             return;
            
