@@ -1,0 +1,183 @@
+fileFormatVersion: 2
+guid: 5789cfc4dc174034797655a427188d8f
+timeCreated: 1491516959
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: background
+    100002: basse_plateforme_stone_IMOBILE
+    100004: basse_plateforme_stone_IMOBILE_MeshPart0
+    100006: basse_plateforme_stone_IMOBILE_MeshPart1
+    100008: basse_platforme.001
+    100010: basse_platforme.003
+    100012: Camera
+    100014: falling_floor_right
+    100016: haute_plateforme
+    100018: haute_plateforme_stone
+    100020: hit_box_falling_left
+    100022: hit_box_falling_right
+    100024: hit_box_imobile
+    100026: //RootNode
+    100028: moisissure
+    100030: ponts
+    100032: puit_1
+    100034: puit_1_MeshPart0
+    100036: puit_1_MeshPart1
+    100038: puit_2
+    100040: puit_3
+    100042: puits_4
+    100044: Pyramid
+    100046: staires_temple
+    400000: background
+    400002: basse_plateforme_stone_IMOBILE
+    400004: basse_plateforme_stone_IMOBILE_MeshPart0
+    400006: basse_plateforme_stone_IMOBILE_MeshPart1
+    400008: basse_platforme.001
+    400010: basse_platforme.003
+    400012: Camera
+    400014: falling_floor_right
+    400016: haute_plateforme
+    400018: haute_plateforme_stone
+    400020: hit_box_falling_left
+    400022: hit_box_falling_right
+    400024: hit_box_imobile
+    400026: //RootNode
+    400028: moisissure
+    400030: ponts
+    400032: puit_1
+    400034: puit_1_MeshPart0
+    400036: puit_1_MeshPart1
+    400038: puit_2
+    400040: puit_3
+    400042: puits_4
+    400044: Pyramid
+    400046: staires_temple
+    2300000: background
+    2300002: basse_plateforme_stone_IMOBILE_MeshPart0
+    2300004: basse_plateforme_stone_IMOBILE_MeshPart1
+    2300006: basse_platforme.001
+    2300008: basse_platforme.003
+    2300010: falling_floor_right
+    2300012: haute_plateforme
+    2300014: haute_plateforme_stone
+    2300016: hit_box_falling_left
+    2300018: hit_box_falling_right
+    2300020: hit_box_imobile
+    2300022: moisissure
+    2300024: ponts
+    2300026: puit_1_MeshPart0
+    2300028: puit_1_MeshPart1
+    2300030: puit_2
+    2300032: puit_3
+    2300034: puits_4
+    2300036: Pyramid
+    2300038: staires_temple
+    3300000: background
+    3300002: basse_plateforme_stone_IMOBILE_MeshPart0
+    3300004: basse_plateforme_stone_IMOBILE_MeshPart1
+    3300006: basse_platforme.001
+    3300008: basse_platforme.003
+    3300010: falling_floor_right
+    3300012: haute_plateforme
+    3300014: haute_plateforme_stone
+    3300016: hit_box_falling_left
+    3300018: hit_box_falling_right
+    3300020: hit_box_imobile
+    3300022: moisissure
+    3300024: ponts
+    3300026: puit_1_MeshPart0
+    3300028: puit_1_MeshPart1
+    3300030: puit_2
+    3300032: puit_3
+    3300034: puits_4
+    3300036: Pyramid
+    3300038: staires_temple
+    4300000: hit_box_falling_right
+    4300002: hit_box_falling_left
+    4300004: basse_platforme.003
+    4300006: basse_platforme.001
+    4300008: falling_floor_right
+    4300010: puit_3
+    4300012: puit_2
+    4300014: puit_1_MeshPart0
+    4300016: puit_1_MeshPart1
+    4300018: puits_4
+    4300020: moisissure
+    4300022: staires_temple
+    4300024: Pyramid
+    4300026: hit_box_imobile
+    4300028: ponts
+    4300030: basse_plateforme_stone_IMOBILE_MeshPart0
+    4300032: basse_plateforme_stone_IMOBILE_MeshPart1
+    4300034: haute_plateforme_stone
+    4300036: background
+    4300038: haute_plateforme
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

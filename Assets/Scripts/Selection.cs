@@ -28,8 +28,8 @@ public class Selection : MonoBehaviour {
     {
         cam.transform.position = new Vector3(
               cam.transform.position.x + Mathf.Cos(Time.time / 20) / 100,
-              cam.transform.position.y + Mathf.Sin(Time.time)/500,
-              cam.transform.position.z + Mathf.Sin(Time.time)/500
+              cam.transform.position.y + Mathf.Sin(Time.time) / 500,
+              cam.transform.position.z + Mathf.Sin(Time.time) / 500
           );
 
         cam.transform.LookAt(new Vector3(0, 0, 5));
@@ -42,12 +42,12 @@ public class Selection : MonoBehaviour {
 
         if(selected == 1 && canChangePCount)
         {
-            if (Input.GetAxis("Horizontal_1") > 0.5f && Config.playerCount < 4)
+            if (Input.GetAxis("Horizontal_All") > 0.5f && Config.playerCount < 4)
             {
                 Config.playerCount++;
                 StartCoroutine(WaitTogglePlayer());
             }
-            else if (Input.GetAxis("Horizontal_1") < -0.5f && Config.playerCount > 2)
+            else if (Input.GetAxis("Horizontal_All") < -0.5f && Config.playerCount > 2)
             {
                 Config.playerCount--;
                 StartCoroutine(WaitTogglePlayer());
