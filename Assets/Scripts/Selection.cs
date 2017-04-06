@@ -39,7 +39,7 @@ public class Selection : MonoBehaviour {
               cam.transform.position.z + Mathf.Sin(Time.time)/500
           );
 
-        cam.transform.LookAt(new Vector3(-92, 160 , 5));
+        cam.transform.LookAt(new Vector3(0, 0, 5));
 
         if (Input.GetButtonDown("Fire2"))
         {
