@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 628e06d9633c0044a9356e9aac627f73
 timeCreated: 1491516954
+=======
+guid: c7401ceb4d3736e4c98aa6820eb4040a
+timeCreated: 1491516197
+>>>>>>> debugging_players
 licenseType: Free
 NativeFormatImporter:
   userData: 
