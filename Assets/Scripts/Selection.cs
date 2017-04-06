@@ -41,18 +41,15 @@ public class Selection : MonoBehaviour {
 
         cam.transform.LookAt(new Vector3(0, 0, 5));
 
-        if (Input.GetButtonDown("Fire2"))
+        if (Input.GetButtonDown("Fire2") || Input.GetButtonDown("Submit") || Input.GetButtonDown("Jump"))
         {
             if (selected == 0)
                 SceneManager.LoadScene("BattleRoyale");
             else if(selected == 1)
-                SceneManager.LoadScene("Tutorial");
-            else if (selected == 2)
                 SceneManager.LoadScene("Options");
         }
 
         float d = Input.GetAxis("Vertical_All");
-     
 
         if (canMove && d >= 0.5f){
             selected--;
