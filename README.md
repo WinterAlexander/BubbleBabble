@@ -23,10 +23,10 @@ The scenery
 ![Imgur](http://i.imgur.com/tEOHWqP.png)
 
 ## Power-Ups
-### Bubble Pound
-Upon activation, the bubble pound launches you in the air while making you move slightly forward and then smashes you on the ground with such force that a shockwave forms propels nearby enemies.
+### Ground Pound
+Upon activation, the ground pound launches you in the air while making you move slightly forward and then smashes you on the ground with such force that a shockwave forms propels nearby enemies.
 
-Red bubble being launched in the air by activating the bubble pound.
+Red bubble being launched in the air by activating the ground pound.
 ![Imgur](http://i.imgur.com/evvETkI.png)
 
 The shockwave created by the red bubble propelling the green and yellow bubble.
@@ -38,13 +38,13 @@ Upon activation, a whirlpool is spawned on your location. The whirlpool sucks en
 Red bubble enjoys himself while the three other players are fighting furiously against the wrath of the whirlpool.
 ![Imgur](http://i.imgur.com/cTlp45E.png)
 
-### Shotbubble
-Upon activation, a blast is spawned in the direction you are looking, blasting all nearby players. A massive knockback is sent to the caster due to the force of the shotbubble.
+### Shotgun
+Upon activation, a blast is spawned in the direction you are looking, blasting all nearby players. A massive knockback is sent to the caster due to the force of the shotgun.
 
-The blue bubble being propelled by the red bubble's shotbubble
+The blue bubble being propelled by the red bubble's shotgun
 ![Imgur](http://i.imgur.com/H5JbLio.png)
 
-### Bazoobubble
+### Bazooka
 Upon activation, a missile is spawned at your location. If an enemy bubble stands in a close radius to the missile's direction the bubble will be a locked target of the missile. Upon impact, the missile explods propelling the target from the explosion's location.
 
 Red bubble sends a targeted missile to green bubble.
