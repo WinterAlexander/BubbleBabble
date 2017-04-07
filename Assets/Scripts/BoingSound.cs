@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class BoingSound : MonoBehaviour {
     private AudioSource source;
+    private AudioClip[] clips;
 	// Use this for initialization
 	void Start () {
-        source = gameObject.GetComponent<AudioSource>();
+        clips = GameObject.Find("AudioMaster").GetComponent<AudioContainer>().audios;
+        source = GetComponent<AudioSource>();
         source.volume = 0;
 	}
 	
@@ -17,7 +19,8 @@ public class BoingSound : MonoBehaviour {
 
     void OnCollisionEnter(Collision other)
     {
-        source.volume = 0.25f;
+        source.volume = 1f;
+        source.clip = clips[Random.Range(0, clips.Length - 1)];
         source.pitch = UnityEngine.Random.Range(0.8f, 1f);
         source.Play();
     }

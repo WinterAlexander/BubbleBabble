@@ -12,6 +12,8 @@ public class GeyserComponent : MonoBehaviour {
     private float ceilingHeight;
     private float startHeight;
     private bool isGeysing;
+    private AudioClip[] audioClips;
+    private AudioSource source;
 
     void Start () {
         emitter = gameObject.GetComponentsInChildren<Transform>()[1].gameObject;
@@ -19,6 +21,10 @@ public class GeyserComponent : MonoBehaviour {
         startHeight = emitter.transform.position.y;
         ceilingHeight = startHeight + 5f;
         isGeysing = false;
+
+        source = gameObject.AddComponent<AudioSource>();
+        source.volume = 0;
+        audioClips = GameObject.Find("AudioMaster").GetComponent<AudioContainer>().audios;
         StartCoroutine(StartGeysing());      
     }
 	
@@ -35,6 +41,10 @@ public class GeyserComponent : MonoBehaviour {
 
                 if (dis <= 0.75 && p.transform.position.y >= startHeight - 0.75f && p.transform.position.y <= ceilingHeight && p.GetComponent<Rigidbody>().velocity.y < 5)
                 {
+                    source.volume = 1f;
+                    source.clip = audioClips[UnityEngine.Random.Range(0, audioClips.Length - 1)];
+                    source.pitch = UnityEngine.Random.Range(0.8f, 1f);
+                    source.Play();
                     p.GetComponent<Rigidbody>().velocity = new Vector3(0, 8, 0);
                 }
             }
