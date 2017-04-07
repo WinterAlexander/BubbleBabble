@@ -13,6 +13,7 @@ Technologies used:
   - Blender
   - Photoshop
   - Illustrator
+  - FL Studio
 
 Gameplay:
 (insert screenshots)
