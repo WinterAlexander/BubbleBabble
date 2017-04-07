@@ -1,5 +1,5 @@
 # BubbleBabble
-Game made in one week as a qualification for a intercollegiate game jam. Our team (failed like shit|won a place|won second place|won first place) to represent our college Édouard Monpetit. Imposed theme was "Bubbles" so we developped a BattleRoyale game mode in a 2 to 4 local multiplayer.
+Game made in one week as a qualification for a intercollegiate game jam. Our team (failed like shit|won a place|won second place|won first place) to represent our college Édouard Monpetit. Imposed theme was "Bubbles" so we developped a BattleRoyale game mode in a 2 to 4 local multiplayer with joystick controls.
 
 [Official rules for competition (french)](https://drive.google.com/open?id=0B0xPUTrdt1h7UTBiU3RRTzc4ZDg)
 
@@ -34,10 +34,14 @@ Red bubble being launched in the air by activating the bubble pound.
 The shockwave created by the red bubble propelling the green and yellow bubble.
 ![Imgur](http://i.imgur.com/k47UuR1.png)
 
-### Whirpool
+### Whirlpool
 Upon activation, a whirlpool is spawned on your location. The whirlpool sucks enemies in a swirling pattern. The whirlpool moves slowly and lasts only a few seconds. It is possible to get out of the whirlpool and the caster is immune to it.
 
 Red bubble enjoys himself while the three other players are fighting furiously against the wrath of the whirlpool.
 ![Imgur](http://i.imgur.com/cTlp45E.png)
 
+### Shotbubble
+Upon activation, a blast is spawned in the direction you are looking, blasting all nearby players.
 
+The blue bubble being propelled by the red bubble's shotbubble
+![Imgur](http://i.imgur.com/H5JbLio.png)
