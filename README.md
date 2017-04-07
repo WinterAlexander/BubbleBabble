@@ -20,8 +20,6 @@ Game made in one week as a qualification for a intercollegiate game jam. Our tea
 ## Gameplay
 The scenery
 ![Imgur](http://i.imgur.com/byKnGtv.png)
-
-![Imgur](http://i.imgur.com/aqNYj3l.png)
 ![Imgur](http://i.imgur.com/tEOHWqP.png)
 
 ## Power-Ups
@@ -41,7 +39,17 @@ Red bubble enjoys himself while the three other players are fighting furiously a
 ![Imgur](http://i.imgur.com/cTlp45E.png)
 
 ### Shotbubble
-Upon activation, a blast is spawned in the direction you are looking, blasting all nearby players.
+Upon activation, a blast is spawned in the direction you are looking, blasting all nearby players. A massive knockback is sent to the caster due to the force of the shotbubble.
 
 The blue bubble being propelled by the red bubble's shotbubble
 ![Imgur](http://i.imgur.com/H5JbLio.png)
+
+### Bazoobubble
+Upon activation, a missile is spawned at your location. If an enemy bubble stands in a close radius to the missile's direction the bubble will be a locked target of the missile. Upon impact, the missile explods propelling the target from the explosion's location.
+
+Red bubble sends a targeted missile to green bubble.
+![Imgur](http://i.imgur.com/aqNYj3l.png)
+
+Red bubble's missile explods on blue bubble after curving to readjust it's path in order to hit the locked target.
+![Imgur](http://i.imgur.com/C6lNEOE.png)
+
