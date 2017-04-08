@@ -6,11 +6,11 @@ Game made in one week as a qualification for a intercollegiate game jam. Our tea
 [Official rules for competition (french)](https://drive.google.com/open?id=0B0xPUTrdt1h7UTBiU3RRTzc4ZDg)
 
 ## Team Members 
-  - Cedric Martens, Programmer and game designer
-  - Alexander Winter, Programmer and game designer
+  - [Cedric Martens](https://github.com/MartensCedric/), Programmer and game designer
+  - [Alexander Winter](https://github.com/WinterGuardian/), Programmer and game designer
   - Marc-Étienne Foster, 3D modeler/artist
   - Sam Tremblay, UI designer/artist
-  - Patrice Le Nouveau, Musician and game design support
+  - [Patrice Le Nouveau](https://github.com/patlenew/), Musician and game design support
 
 ## Technologies used
   - Unity3D
