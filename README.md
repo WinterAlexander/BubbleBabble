@@ -10,7 +10,7 @@ Game made in one week as a qualification for a intercollegiate game jam. Our tea
   - [Cedric Martens](https://github.com/MartensCedric/), Programmer and game designer
   - [Alexander Winter](https://github.com/WinterGuardian/), Programmer and game designer
   - [Marc-Étienne Foster](http://mefoster.ca/), 3D modeler/artist
-  - Sam Tremblay, UI designer/artist
+  - [Sam Tremblay](http://samtremblay.com/), UI designer/artist
   - [Patrice Le Nouveau](https://github.com/patlenew/), Musician and game design support
 
 ## Technologies used
