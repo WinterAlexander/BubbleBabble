@@ -1,6 +1,6 @@
 # BubbleBabble
 [//]: # (TODO indicate if we won/position)
-Game made in one week as a qualification for a intercollegiate game jam. It was one week long but we couldn't work on it full time due to our courses. Our won a place to represent our college Édouard Monpetit. Imposed theme was "Bubbles" so we developped a BattleRoyale game mode in a 2 to 4 local multiplayer with joystick controls.
+BubbleBabble is a game made in one week as a qualification for an intercollegiate Game Jam. The time constraint was 7 days, but we couldn't work on it full time due to class. Our team won a place to represent our college Édouard-Montpetit. The imposed theme was "Bubbles", therefore we developped a BattleRoyale game in a 2 to 4 local multiplayer with joystick controls.
 
 [Download GameJam submitted version](https://drive.google.com/file/d/0B4-QXySBc7aHZzF5X2N5a1lVOW8/view?usp=sharing)
 
