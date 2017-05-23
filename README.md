@@ -24,3 +24,7 @@ BubbleBabble is a game made in one week as a qualification for an intercollegiat
 The scenery
 ![Imgur](http://i.imgur.com/byKnGtv.png)
 ![Imgur](http://i.imgur.com/tEOHWqP.png)
+
+## Wiki
+
+Check the [wiki](https://github.com/WinterGuardian/BubbleBabble/wiki/Power-Ups) for more infos and screenshots !
